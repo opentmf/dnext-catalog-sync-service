@@ -1,0 +1,240 @@
+{
+  "id": "UCLiveReportsOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCLiveReportsOffering",
+  "revision": 0,
+  "version": "1.0",
+  "name": "Live Reports",
+  "description": "UCLiveReportsOffering",
+  "lastUpdate": "2022-11-29T14:29:55.758Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-11-29T14:29:55.773Z",
+  "updatedDate": "2022-11-29T14:29:55.773Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCNoNumberLicenseSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+    "name": "UCNoNumberLicenseSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Live Reports",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_LR_398",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LiveReports",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseStandard|OfficeLicensePremium",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "valueType": "true/false",
+      "configurable": false,
+      "description": "Is a modify Characteristics allowed Product",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+      ],
+      "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

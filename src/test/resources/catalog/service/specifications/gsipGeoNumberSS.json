@@ -1,0 +1,174 @@
+{
+  "revision": 0,
+  "createdDate": "2023-08-30T12:12:25.881Z",
+  "updatedDate": "2023-08-30T12:12:25.881Z",
+  "createdBy": "pablofgarciadominguez@gmail.com",
+  "updatedBy": "pablofgarciadominguez@gmail.com",
+  "id": "gsipGeoNumberSS",
+  "version": "0",
+  "href": "/tmf-api/serviceCatalogManagement/v4/serviceSpecification/gsipGeoNumberSS:(version=0)",
+  "@baseType": "ServiceSpecification",
+  "description": "GSIP Geographical Number Service Specification",
+  "name": "GSIPGeoNumberSS",
+  "lifecycleStatus": "In study",
+  "lastUpdate": "2023-08-30T12:12:25.880Z",
+  "validFor": {
+    "startDateTime": "2023-08-30T14:46:29.589Z"
+  },
+  "specCharacteristic": [
+    {
+      "configurable": true,
+      "description": "Quantity of the ordered item, used in Lot Size pattern. It overrides the QuoteItem/OrderItem.Quantity field",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "bulkQuantity",
+      "valueType": "integer",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Order ID from DigiCom",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "digicomOrderId",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Order Item ID from DigiCom",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "digicomOrderItemId",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Product Instance ID from DigiCom",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "digicomProductInstanceId",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Name of the number service provider the number to be ported from",
+      "maxCardinality": 1,
+      "minCardinality": 0,
+      "name": "losingServiceProviderName",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Indicates that the number is nomadic,  therefore the associated emergency contact address is not reliable",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "nomadicNumber",
+      "valueType": "true/false",
+      "characteristicValueSpecification": [
+        {
+          "isDefault": true,
+          "validFor": {
+            "startDateTime": "2023-08-30T07:21:26.892Z"
+          },
+          "value": "true"
+        },
+        {
+          "isDefault": false,
+          "validFor": {
+            "startDateTime": "2023-08-30T07:21:26.892Z"
+          },
+          "value": "false"
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Indicates that number porting was requested by the customer",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "numberPortingRequired",
+      "valueType": "true/false",
+      "characteristicValueSpecification": [
+        {
+          "isDefault": true,
+          "validFor": {
+            "startDateTime": "2023-08-30T07:22:00.142Z"
+          },
+          "value": "true"
+        },
+        {
+          "isDefault": false,
+          "validFor": {
+            "startDateTime": "2023-08-30T07:22:00.142Z"
+          },
+          "value": "false"
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "description": "Reference to the Vodafone Product Taxonomy  Product ID from PSdb system",
+      "extensible": false,
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "psdbPoId",
+      "valueType": "string",
+      "characteristicValueSpecification": [
+        {
+          "isDefault": true,
+          "valueType": "string",
+          "value": "PO1761"
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "The first number of the ported phone numbers. The range is inclusive",
+      "maxCardinality": 1,
+      "minCardinality": 0,
+      "name": "rangeStartNumber",
+      "regex": "+?([d]{1,3})?-?(?([d]{3}))?s*-?([d]{3})-?([d]{4,6})",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Name of the Number service provider",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "serviceProvider",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "configurable": true,
+      "description": "Vendor (TATA) provided Account ID for the End Customer, created as part of customer account on-boarding",
+      "maxCardinality": 1,
+      "minCardinality": 0,
+      "name": "vendorAccountId",
+      "valueType": "string",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "targetEntitySchema": {
+    "@schemaLocation": "api/serviceCatalogManagement/v4/schema/RFS.json",
+    "@type": "RFS"
+  }
+}

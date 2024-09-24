@@ -1,0 +1,157 @@
+{
+  "id": "UCPSTNNonGeoNumberSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNNonGeoNumberSpecification",
+  "revision": 0,
+  "name": "UCPSTNNonGeoNumberSpecification",
+  "description": "UCPSTNNonGeoNumberSpecification",
+  "lastUpdate": "2023-02-13T10:53:05.360Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T12:06:05.574Z"
+  },
+  "createdDate": "2023-02-13T10:53:05.422Z",
+  "updatedDate": "2023-02-13T10:53:05.422Z",
+  "createdBy": "Manpreet_API",
+  "updatedBy": "Manpreet_API",
+  "productSpecCharacteristic": [
+    {
+      "name": "serviceProviderName",
+      "description": "Service Provider Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "TATA",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "COLT",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "c4ed5c1d-4b90-48ff-b8bb-e84f11367cce",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNNonGeoNumber",
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "17c9ec87-9bac-4c71-86e4-23bed041bf10",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNMainNumber",
+          "isDefault": true
+        }
+      ],
+      "id": "79aee5db-d897-4dba-868c-af370ae60147",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "hasInventoryEntry",
+      "description": "Inventory Entry",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "false",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "53cbb588-ef28-46f9-9a68-85d2eeb86ab7",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "numberCount",
+      "description": "Number Count",
+      "valueType": "integer",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "3e09b8a7-acb2-49c7-bba8-c8d3ce2db93b",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCNumber_Add",
+        "relatedSpecifications": [
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCMainNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+              "name": "UCMainNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          }
+        ]
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

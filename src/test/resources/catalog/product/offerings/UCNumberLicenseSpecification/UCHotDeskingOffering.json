@@ -1,0 +1,232 @@
+{
+  "id": "UCHotDeskingOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCHotDeskingOffering",
+  "revision": 0,
+  "name": "Hot Desking",
+  "description": "UCHotDeskingOffering",
+  "lastUpdate": "2022-12-05T21:13:34.165Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-12-05T21:13:34.185Z",
+  "updatedDate": "2022-12-05T21:13:34.185Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCNumberLicenseSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+    "name": "UCNumberLicenseSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Hot Desking",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_DL-HDSK_177",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "HotDesking",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicensePremium|OfficeLicensePremiumVoice",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "valueType": "true/false",
+      "configurable": false,
+      "description": "Modify Characteristics Allowed",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+      ],
+      "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

@@ -1,0 +1,543 @@
+{
+  "id": "UCDigitalLineLicenseStandardOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseStandardOffering",
+  "revision": 0,
+  "version": "1.0",
+  "name": "Office License - Standard Edition",
+  "description": "UC DigitalLine License Standard Offering",
+  "lastUpdate": "2022-12-09T15:53:16.522Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-01-23T06:28:23.515Z"
+  },
+  "createdDate": "2022-12-09T15:53:16.622Z",
+  "updatedDate": "2022-12-09T15:53:16.622Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCDigitalLineLicenseSpecification",
+    "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+    "name": "UCDigitalLineLicenseSpecification",
+    "version": "1.0",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "profileName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Profile Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "FULL_STACK_STANDARD",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Office License ",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_DL-UNL_50",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "sendConfirmationEmail",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Send Confirmation Email",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "No",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "activateImmediately",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Activate Immediately",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Yes",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseStandard",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "currency",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Currency",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "EUR",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "GBP",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactFirstName",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact First Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "^[a-zA-Z0-9\\s,.'\\-\\pL]+$",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactLastName",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact Last Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "^[a-zA-Z0-9\\s,.'\\-\\pL]+$",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactEmail",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact Email",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "^[a-zA-Z0-9]+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+$",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactMobile",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact Mobile",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "^[+][0-9]{11}$|^[+][0-9]{12}$",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "sendWelcomeEmail",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Send Welcome Email",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "True",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "False",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "opportunityId",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Opportunity Id",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "valueType": "true/false",
+      "configurable": false,
+      "description": "Modify Characteristics Allowed",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+      ],
+      "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": false
+}

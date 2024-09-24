@@ -1,0 +1,112 @@
+{
+  "id": "UCMainNumberSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+  "revision": 24,
+  "name": "UCMainNumberSpecification",
+  "description": "UC Main Number Specification",
+  "lastUpdate": "2023-04-13T13:45:37.561Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T12:06:05.574Z"
+  },
+  "createdDate": "2023-01-13T09:45:56.704Z",
+  "updatedDate": "2023-04-13T13:45:37.656Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "UC-SOA-API",
+  "productSpecCharacteristic": [
+    {
+      "name": "siteName",
+      "description": "Site Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "716a6c35-4326-4f65-8119-c4d65684bcfe",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "mainNumber",
+      "description": "Main Number",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "0398fb95-cee1-4efb-b0c2-677463bc0032",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "numberType",
+      "description": "Number Type",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "6caa7b69-e830-4807-9d9f-ce66036c79db",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNMainNumber",
+          "isDefault": true
+        }
+      ],
+      "id": "33fed862-86f8-4257-b51f-d72c24469fbe",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "rcUid",
+      "description": "Ring Central User Id",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "dd4a126b-282b-483f-9d75-aab1bf81abe3",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCMainNumber_Add"
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

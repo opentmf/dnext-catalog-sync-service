@@ -1,0 +1,19 @@
+{
+  "id": "30",
+  "href": "/tmf-api/productCatalogManagement/v4/category/30",
+  "revision": 69,
+  "version": "1.0",
+  "name": "UC",
+  "description": "Unified Communications",
+  "lastUpdate": "2022-10-11T13:23:13.355Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2021-03-28T11:33:32.897Z"
+  },
+  "createdDate": "2022-10-11T13:23:13.362Z",
+  "updatedDate": "2023-03-23T06:31:38.201Z",
+  "createdBy": "gokhan.demir@pia-team.com",
+  "updatedBy": "yusuf.bozkurt@pia-team.com",
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/category.json",
+  "isRoot": true
+}

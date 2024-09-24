@@ -1,0 +1,231 @@
+{
+  "category": [
+    {
+      "id": "50",
+      "href": "/tmf-api/productCatalogManagement/v4/category/50",
+      "name": "PCR",
+      "version": "1.0"
+    }
+  ],
+  "description": "PCR Azure Plan",
+  "isBundle": false,
+  "isSellable": true,
+  "lifecycleStatus": "Launched",
+  "name": "PCR Azure Plan",
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "cspPartnerDomainName",
+      "valueType": "string",
+      "characteristicType": "",
+      "configurable": true,
+      "description": "CSP Partner Domain Name.",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "cspPartnerDomainName",
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "cspPartnerId",
+      "valueType": "string",
+      "characteristicType": "",
+      "configurable": true,
+      "description": "CSP Partner Id",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "cspPartnerId",
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "azurePlanSubscriptionId",
+      "valueType": "string",
+      "characteristicType": "",
+      "configurable": false,
+      "description": "Azure Plan Subscription Id",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "azurePlanSubscriptionId",
+      "mandatory": false,
+      "isVisible": true
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactFirstName",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact First Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "a4d1f1ad-7516-4e7d-a8ac-359ff710adcd",
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactLastName",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact Last Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "37120c50-9ccb-4d02-ab8e-d1713f1acacb",
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "primaryContactMobile",
+      "valueType": "string",
+      "configurable": true,
+      "description": "Primary Contact Mobile",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "1f4f6599-8891-4581-a413-0ce989cb9aa7",
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "customerDomainName",
+      "valueType": "string",
+      "characteristicType": "",
+      "configurable": true,
+      "description": "Customer Domain Name (e.x someone.onmicrosoft.com).",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "PCRAzurePlanProductSpec",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+        "name": "PCRAzurePlanProductSpec",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "id": "customerDomainName",
+      "mandatory": true,
+      "isVisible": false
+    }
+  ],
+  "productSpecification": {
+    "id": "PCRAzurePlanProductSpec",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+    "name": "PCRAzurePlanProductSpec",
+    "@referredType": "ProductSpecification"
+  },
+  "version": "1.0"
+}

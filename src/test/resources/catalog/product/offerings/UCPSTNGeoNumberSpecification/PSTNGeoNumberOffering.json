@@ -1,0 +1,34 @@
+{
+  "id": "PSTNGeoNumberOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/PSTNGeoNumberOffering",
+  "revision": 0,
+  "version": "1.0",
+  "name": "PSTN Geo Number",
+  "description": "PSTNGeoNumberOffering",
+  "lastUpdate": "2022-11-29T14:28:26.588Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-11-29T14:28:26.604Z",
+  "updatedDate": "2022-11-29T14:28:26.604Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCPSTNGeoNumberSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNGeoNumberSpecification",
+    "name": "UCPSTNGeoNumberSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

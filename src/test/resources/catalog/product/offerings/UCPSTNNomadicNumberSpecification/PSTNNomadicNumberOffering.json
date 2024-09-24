@@ -1,0 +1,34 @@
+{
+  "id": "PSTNNomadicNumberOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/PSTNNomadicNumberOffering",
+  "revision": 0,
+  "version": "1.0",
+  "name": "PSTN Nomadic Number",
+  "description": "PSTN Nomadic Number",
+  "lastUpdate": "2022-11-29T14:29:05.708Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-11-29T14:29:05.735Z",
+  "updatedDate": "2022-11-29T14:29:05.735Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCPSTNNomadicNumberSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNNomadicNumberSpecification",
+    "name": "UCPSTNNomadicNumberSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

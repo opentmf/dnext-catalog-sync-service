@@ -1,0 +1,153 @@
+{
+  "id": "UCRingCentralOfficeLicensePremiumEdition",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralOfficeLicensePremiumEdition",
+  "revision": 45,
+  "version": "1.0",
+  "name": "Vodafone Business UC - Premium Edition",
+  "description": "Vodafone Business UC - Premium Edition",
+  "lastUpdate": "2022-12-07T14:44:18.417Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-01-23T11:39:44.027Z"
+  },
+  "createdDate": "2022-12-07T14:44:18.450Z",
+  "updatedDate": "2023-04-17T11:36:10.377Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "pablofgarciadominguez@gmail.com",
+  "productOfferingRelationship": [],
+  "agreement": [],
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "channel": [],
+  "marketSegment": [],
+  "place": [],
+  "bundledProductOffering": [
+    {
+      "id": "UCDigitalLineLicensePremiumOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicensePremiumOffering",
+      "name": "Office License - Premium Edition",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCMainNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+      "name": "Main Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCLiveReportsOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCLiveReportsOffering",
+      "name": "Live Reports",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCMeetingsAddOnLicenseOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMeetingsAddOnLicenseOffering",
+      "name": "Meetings Add-On License",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCRingCentralRoomsConnectorOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralRoomsConnectorOffering",
+      "name": "RCV Rooms Connector",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCRingCentralRoomsOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralRoomsOffering",
+      "name": "RingCentral Rooms",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDigitalLineBasicDomesticOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineBasicDomesticOffering",
+      "name": "Limited Extension",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalLocalNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalLocalNumberOffering",
+      "name": "Additional Phone Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalTollFreeNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalTollFreeNumberOffering",
+      "name": "Additional Phone Number - Toll Free",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCHotDeskingOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCHotDeskingOffering",
+      "name": "Hot Desking",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": true,
+  "isSellable": true
+}

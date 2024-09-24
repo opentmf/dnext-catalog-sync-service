@@ -1,0 +1,248 @@
+{
+  "id": "UCDigitalLineAddOnLicenseSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+  "revision": 0,
+  "name": "UCDigitalLineAddOnLicenseSpecification",
+  "description": "UCDigitalLineAddOnLicenseSpecification",
+  "lastUpdate": "2023-03-02T10:01:12.128Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T10:42:19.609Z"
+  },
+  "createdDate": "2023-03-02T10:01:12.231Z",
+  "updatedDate": "2023-03-02T10:01:12.231Z",
+  "createdBy": "mnprtsaggu07@gmail.com",
+  "updatedBy": "mnprtsaggu07@gmail.com",
+  "productSpecCharacteristic": [
+    {
+      "name": "licenseQuantity",
+      "description": "License Quantity",
+      "valueType": "integer",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "id": "ddb814f6-6497-43ae-925c-6794f8ffe36a",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseBusinessName",
+      "description": "License Business Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Additional Phone number",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Additional Phone number - Toll free",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Live Reports",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Limited Extension",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "RingCentral Rooms",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "RCV Rooms Connector",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Meetings Add-On License",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Hot Desking",
+          "isDefault": false
+        }
+      ],
+      "id": "0a676ca9-c32f-45c3-a8be-e191908ec51d",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseSKU",
+      "description": "License SKU",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_ALN_38",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_ATN_39",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_LR_398",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_DL-HDSK_177",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_DL-BAS_178",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_RCRM_77",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_RCON_78",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "LC_SM_476",
+          "isDefault": false
+        }
+      ],
+      "id": "a4ae9041-e43e-4b1a-8702-75c59e065ce5",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseVendor",
+      "description": "License Vendor",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "isDefault": true
+        }
+      ],
+      "id": "4665f1a3-31df-4005-98e6-fb55af336830",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "hasInventoryEntry",
+      "description": "Inventory Entry",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "false",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "53cbb588-ef28-46f9-9a68-85d2eeb86ab7",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "VBUC",
+          "isDefault": false
+        }
+      ],
+      "id": "cd03b1ba-30b1-4c69-92ae-9156a65a9064",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "",
+          "isDefault": false
+        }
+      ],
+      "id": "23629d94-913c-4923-abe4-a7163365a661",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCLicense_Add",
+        "relatedSpecifications": [
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCMainNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+              "name": "UCMainNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          }
+        ]
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

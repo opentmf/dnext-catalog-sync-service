@@ -1,0 +1,22 @@
+{
+  "category": [
+    {
+      "id": "50",
+      "href": "/tmf-api/productCatalogManagement/v4/category/50",
+      "name": "PCR",
+      "version": "1.0"
+    }
+  ],
+  "description": "PCR Azure Plan",
+  "isBundle": false,
+  "isSellable": true,
+  "lifecycleStatus": "Launched",
+  "name": "PCR Azure Plan",
+  "productSpecification": {
+    "id": "PCRAzurePlanProductSpec",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/PCRAzurePlanProductSpec",
+    "name": "PCRAzurePlanProductSpec",
+    "@referredType": "ProductSpecification"
+  },
+  "version": "1.0"
+}

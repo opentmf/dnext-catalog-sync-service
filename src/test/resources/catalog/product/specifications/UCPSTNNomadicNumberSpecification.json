@@ -1,0 +1,183 @@
+{
+  "id": "UCPSTNNomadicNumberSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNNomadicNumberSpecification",
+  "revision": 0,
+  "name": "UCPSTNNomadicNumberSpecification",
+  "description": "UCPSTNNomadicNumberSpecification",
+  "lastUpdate": "2023-02-13T10:53:10.013Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T12:06:05.574Z"
+  },
+  "createdDate": "2023-02-13T10:53:10.020Z",
+  "updatedDate": "2023-02-13T10:53:10.020Z",
+  "createdBy": "Manpreet_API",
+  "updatedBy": "Manpreet_API",
+  "productSpecCharacteristic": [
+    {
+      "name": "siteName",
+      "description": "Site Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "/customer?filter=$.contactMedium[?(@.mediumType == \"site\")].characteristic[contactType]",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "77a80b41-f6fc-41ec-a954-ecce97a001fb",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "serviceProviderName",
+      "description": "Service Provider Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "TATA",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "COLT",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "9f7e08d3-21cf-4811-8c06-177621af5cf1",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNNomadicNumber",
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "e806d92d-4edb-4574-b575-ac574059e2a4",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNMainNumber",
+          "isDefault": true
+        }
+      ],
+      "id": "a50c5d85-b8a1-4aab-bc1c-5fe34800cf88",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "hasInventoryEntry",
+      "description": "Inventory Entry",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "false",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "53cbb588-ef28-46f9-9a68-85d2eeb86ab7",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "numberCount",
+      "description": "Number Count",
+      "valueType": "integer",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "6f0ffbb8-ac0c-4f3f-b8de-f74158212577",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCNumber_Add",
+        "relatedSpecifications": [
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCMainNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+              "name": "UCMainNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          }
+        ]
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

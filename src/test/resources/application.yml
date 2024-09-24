@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16.4-alpine:///db
+    hikari:
+      schema: public
+
+pia:
+
+  catalog-sync:
+    enabled: false
+    catalog-version: 1.0.0
+    product-catalog-url: localhost
+    resource-catalog-url: localhost
+    service-catalog-url: localhost
+    client: default
+    compare-mode: lenient
+
+  db-lock:
+    lock-acquire-poll-interval: 100
+    lock-acquire-timeout: 1000
+    lock-hold-timeout: 60000
+
+  webclient:
+    openid:
+      default:
+        connection-provider-name: default-provider
+        request-timeout-millis: 5_000
+        response-timeout-millis: 5_000
+        num-retries: 3
+        retry-wait-millis: 100
+        token-config:
+          use-mock: true
+          token-url: http://localhost:1080/oauth2/token
+          basic-auth-username: user
+          basic-auth-password: pass
+          cache-name: default-token-cache
+          cache-expiry-seconds: 60
+          form-data:
+            username: user
+            password: pass
+            scope: openid
+            grant_type: password

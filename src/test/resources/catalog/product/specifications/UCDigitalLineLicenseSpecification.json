@@ -1,0 +1,442 @@
+{
+  "id": "UCDigitalLineLicenseSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+  "revision": 0,
+  "name": "UCDigitalLineLicenseSpecification",
+  "description": "UC DigitalLine License Specification",
+  "lastUpdate": "2023-01-13T09:45:29.723Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-22T10:25:09.921Z"
+  },
+  "createdDate": "2023-01-13T09:45:29.825Z",
+  "updatedDate": "2023-01-13T09:45:29.825Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecCharacteristic": [
+    {
+      "name": "profileName",
+      "description": "Profile Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "853e3728-2778-467e-a0a6-5372441cb91e",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseBusinessName",
+      "description": "License Business Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Office License ",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "4938bf43-3fb4-49b5-b0c0-4643620dc88b",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseSKU",
+      "description": "License SKU",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_DL-UNL_50",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "d7a32e53-4723-4175-a43a-0339870a4c90",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseVendor",
+      "description": "License Vendor",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "a7a353d7-798f-493c-a757-e4c8156cba82",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "sendConfirmationEmail",
+      "description": "Send Confirmation Email",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "No",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "cca35e4a-4e6d-4c74-a87c-2ca034175705",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "activateImmediately",
+      "description": "Activate Immediately",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Yes",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "c249ec4f-207e-4df4-b773-4a80661006d2",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseEntry",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseStandard",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "OfficeLicensePremium",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseStandardVoiceOnly",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "OfficeLicensePremiumVoiceOnly",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "c2ca5d98-c3fc-4c30-9d37-49e5a29c132f",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "c745dd5a-b2fb-4633-bd48-fae8fe2c79ef",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "currency",
+      "description": "Currency",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "EUR",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "GBP",
+          "isDefault": false
+        }
+      ],
+      "id": "4e879c52-f629-4ed5-9041-1903bc0d234f",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "licenseQuantity",
+      "description": "License Quantity",
+      "valueType": "integer",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "id": "a1053284-5c1c-47c5-b13a-f024fcd309f3",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "primaryContactFirstName",
+      "description": "Primary Contact First Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "^[a-zA-Z0-9\\s,.'\\-\\pL]+$",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "8f9607f3-32dc-4df5-bc53-45198e66ab28",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "primaryContactLastName",
+      "description": "Primary Contact Last Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "^[a-zA-Z0-9\\s,.'\\-\\pL]+$",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "106a05c9-b6cb-4433-985c-b7c995f69d90",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "primaryContactEmail",
+      "description": "Primary Contact Email",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "^[a-zA-Z0-9]+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+$",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "7397a7b4-0a8d-481c-9ed4-53bfea0ea7f7",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "primaryContactMobile",
+      "description": "Primary Contact Mobile",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "^[0-9]{11}$|^[0-9]{12}$",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "295f01fe-d6c7-4491-869f-b020da1e07ac",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "sendWelcomeEmail",
+      "description": "Send Welcome Email",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "True",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "False",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "ff5b4421-8fd5-4ac8-92d2-f96b52ca51cb",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "opportunityId",
+      "description": "Opportunity Id",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "b2347629-57fd-4f77-97c2-9a8c86f9301a",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "description": "Modify Characteristics Allowed",
+      "valueType": "true/false",
+      "characteristicType": "Simple Value",
+      "configurable": false,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+       ],
+       "productSpecCharRelationship": [],
+       "@schemaLocation": "",
+       "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+       "mandatory": false,
+       "isVisible": false,
+       "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCLicense_Add",
+        "relatedSpecifications": [
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCMainNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+              "name": "UCMainNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          }
+        ]
+      },
+      {
+        "operationType": "modify",
+        "preFlow": "UCLicense_Modify"
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}
+

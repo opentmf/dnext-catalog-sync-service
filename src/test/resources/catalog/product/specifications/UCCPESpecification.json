@@ -1,0 +1,180 @@
+{
+  "id": "UCCPESpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCCPESpecification",
+  "revision": 0,
+  "name": "UCCPESpecification",
+  "description": "UCCPESpecification",
+  "lastUpdate": "2023-01-13T09:46:19.936Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T13:41:52.436Z"
+  },
+  "createdDate": "2023-01-13T09:46:19.941Z",
+  "updatedDate": "2023-01-13T09:46:19.941Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecCharacteristic": [
+    {
+      "name": "cpeInfo",
+      "description": "CPE Info",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Cisco 7841 Gigabit Business Phone | LC_HD_522 | Cisco",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Polycom Trio 8800 Conference Phone | LC_HD_528 | Polycom",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Yealink T53W Prime Business Phone | LC_HD_954 | Yealink",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Cisco 8861 Gigabit Color Business Phone | LC_HD_523 | Cisco",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "Polycom VVX-150 Business IP Phone | LC_HD_608 | Polycom",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "d66bfe3e-314b-4d36-9686-60318d5f0e58",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "cpeSiteName",
+      "description": "CPE Site Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "/customer?filter=$.contactMedium[?(@.mediumType == \"site\")].characteristic[contactType]",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "aeae2334-9cdd-4892-af8a-fd5deecf7f63",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "cpeQuantity",
+      "description": "CPE Quantity",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 0,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "1b986ace-2dc3-4bd2-bf08-ac49acccb5d5",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "cpeSiteType ",
+      "description": "CPE Site Type",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 0,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [],
+      "productSpecCharRelationship": [],
+      "id": "8903783d-dae3-4f34-a7b5-68347015a292",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "solutionName",
+      "description": "Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 0,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "VBUC",
+          "isDefault": false
+        }
+      ],
+      "id": "56044e00-9a41-4d2d-9dee-bc0f7dee6fc6",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 0,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "All",
+          "isDefault": false
+        }
+      ],
+      "id": "2b77f920-5a2c-4528-9ef0-288ecd6d70ca",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

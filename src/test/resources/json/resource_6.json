@@ -1,0 +1,44 @@
+{
+  "createdDate": "2023-06-13T08:37:09.553Z",
+  "updatedDate": "2023-06-13T08:37:09.553Z",
+  "createdBy": "UC-SOA-API",
+  "updatedBy": "UC-SOA-API",
+  "revision": 0,
+  "id": "f024ee5a-6aae-4957-ab28-1b1270b945b0",
+  "href": "/tmf-api/resourceInventoryManagement/v4/resource/f024ee5a-6aae-4957-ab28-1b1270b945b0",
+  "category": "PSTNNumber",
+  "nameNumber": "+447446006902",
+  "relatedParty": [
+    {
+      "id": "VFIE",
+      "href": "/tmf-api/party/v4/organization/{{relatedPartyId}}",
+      "name": "VFIE",
+      "role": "operator",
+      "@referredType": "Organization"
+    }
+  ],
+  "resourceCharacteristic": [
+    {
+      "name": "number",
+      "value": "+447446006902"
+    },
+    {
+      "name": "productInstanceId",
+      "value": "bdd5d302-aa78-4573-95e9-3f689dd8c711"
+    },
+    {
+      "name": "mainNumberFlag",
+      "value": "true"
+    },
+    {
+      "name": "numberType",
+      "value": "PSTNGeoNumberOffering"
+    }
+  ],
+  "resourceSpecification": {
+    "id": "UCPSTNNumberResourceSpecification",
+    "href": "/tmf-api/resourceCatalog/v4/resourceSpecification/UCPSTNNumberResourceSpecification"
+  },
+  "resourceStatus": "reserved",
+  "@type": "PhysicalResource"
+}

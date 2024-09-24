@@ -1,0 +1,217 @@
+{
+  "id": "UCPSTNClipPortInAddOnNumberSpecification",
+  "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNClipPortInAddOnNumberSpecification",
+  "revision": 24,
+  "name": "UCPSTNClipPortInAddOnNumberSpecification",
+  "description": "UCPSTNClipPortInAddOnNumberSpecification",
+  "lastUpdate": "2023-02-17T18:36:00.732Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T12:06:05.574Z"
+  },
+  "createdDate": "2023-02-17T18:36:00.830Z",
+  "updatedDate": "2023-02-17T18:36:00.830Z",
+  "createdBy": "mnprtsaggu07@gmail.com",
+  "updatedBy": "mnprtsaggu07@gmail.com",
+  "productSpecCharacteristic": [
+    {
+      "name": "productOfferingName",
+      "description": "Product Offering Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTN Geo Number",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "PSTN NonGeo Number",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        },
+        {
+          "valueType": "string",
+          "value": "PSTN Nomadic Number",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": false
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "cefcd656-281f-4990-b728-735791b570a4",
+      "mandatory": true,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "siteName",
+      "description": "Site Name",
+      "valueType": "string",
+      "configurable": true,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "regex": "",
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "/customer?filter=$.contactMedium[?(@.mediumType == \"site\")].characteristic[contactType]",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "fd3e3909-8c4d-4c52-bc77-28283afe3383",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "dependentSolutionName",
+      "description": "Dependent Solution Name",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNGeoNumber|PSTNNonGeoNumber|PSTNNomadicNumber",
+          "isDefault": false
+        }
+      ],
+      "id": "0f71de43-19a5-4fbb-9719-0883a9909e04",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    },
+    {
+      "name": "hasInventoryEntry",
+      "description": "Inventory Entry",
+      "valueType": "string",
+      "configurable": false,
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "extensible": false,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "false",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": true
+        }
+      ],
+      "productSpecCharRelationship": [],
+      "id": "53cbb588-ef28-46f9-9a68-85d2eeb86ab7",
+      "mandatory": false,
+      "isVisible": false,
+      "isUnique": false
+    }
+  ],
+  "pExtension": {
+    "fulfillmentSpecificationOperation": [
+      {
+        "operationType": "add",
+        "preFlow": "UCCLIPPortInNumber_Add",
+        "relatedSpecifications": [
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCMainNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+              "name": "UCMainNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCPSTNNomadicNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNNomadicNumberSpecification",
+              "name": "UCPSTNNomadicNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCPSTNNonGeoNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNNonGeoNumberSpecification",
+              "name": "UCPSTNNonGeoNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCPSTNGeoNumberSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNGeoNumberSpecification",
+              "name": "UCPSTNGeoNumberSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCDigitalLineAddOnLicenseSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+              "name": "UCDigitalLineAddOnLicenseSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCDigitalLineLicenseSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+              "name": "UCDigitalLineLicenseSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCNoNumberLicenseSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+              "name": "UCNoNumberLicenseSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          },
+          {
+            "relation": "reliesOn",
+            "specification": {
+              "id": "UCLicenseSpecification",
+              "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCLicenseSpecification",
+              "name": "UCNumberLicenseSpecification",
+              "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json"
+            }
+          }
+        ]
+      }
+    ],
+    "createInventoryItem": true
+  },
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productspecification.json",
+  "isBundle": false
+}

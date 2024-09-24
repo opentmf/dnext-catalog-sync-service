@@ -1,0 +1,94 @@
+{
+  "id": "UCRingCentralOfficeLicenseStandardVoiceOnlyEdition",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralOfficeLicenseStandardVoiceOnlyEdition",
+  "revision": 25,
+  "version": "1.0",
+  "name": "Vodafone Business UC -Standard -Voice Only",
+  "description": "Vodafone Business UC -Standard -Voice Only",
+  "lastUpdate": "2022-11-28T13:35:44.381Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-01-23T11:39:44.027Z"
+  },
+  "createdDate": "2022-11-28T13:35:44.398Z",
+  "updatedDate": "2023-04-17T11:36:09.677Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "pablofgarciadominguez@gmail.com",
+  "productOfferingRelationship": [],
+  "agreement": [],
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "channel": [],
+  "marketSegment": [],
+  "place": [],
+  "bundledProductOffering": [
+    {
+      "id": "UCDigitalLineLicenseStandardVoiceOnlyOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseStandardVoiceOnlyOffering",
+      "name": "Office License - Standard Voice Only Edition",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCMainNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+      "name": "Main Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCDigitalLineBasicDomesticOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineBasicDomesticOffering",
+      "name": "Limited Extension",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalLocalNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalLocalNumberOffering",
+      "name": "Additional Phone Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalTollFreeNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalTollFreeNumberOffering",
+      "name": "Additional Phone Number - Toll Free",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": true,
+  "isSellable": true
+}

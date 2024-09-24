@@ -1,0 +1,229 @@
+{
+  "id": "UCDigitalLineLicenseAddOnOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseAddOnOffering",
+  "revision": 1,
+  "name": "Office License Add-On",
+  "description": "UCDigitalLineLicenseAddOnOffering",
+  "lastUpdate": "2023-03-14T09:10:38.726Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-12-09T09:34:53.278Z",
+  "updatedDate": "2023-03-14T09:10:38.731Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "gokhan.demir@pia-team.com",
+  "productSpecification": {
+    "id": "UCDigitalLineAddOnLicenseSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+    "name": "UCDigitalLineAddOnLicenseSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Office License Add-On",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_DL-UNL_50",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseAddOn",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineAddOnLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineAddOnLicenseSpecification",
+        "name": "UCDigitalLineAddOnLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseEntry|OfficeLicenseStandard|OfficeLicensePremium|OfficeLicenseStandardVoice|OfficeLicensePremiumVoice",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "hasInventoryEntry",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Inventory Entry",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "false",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "isDefault": true
+        }
+      ],
+      "id": "53cbb588-ef28-46f9-9a68-85d2eeb86ab7",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

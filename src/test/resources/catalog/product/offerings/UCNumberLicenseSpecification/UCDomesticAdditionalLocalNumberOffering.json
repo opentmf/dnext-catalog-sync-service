@@ -1,0 +1,233 @@
+{
+  "id": "UCDomesticAdditionalLocalNumberOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalLocalNumberOffering",
+  "revision": 3,
+  "version": "1.0",
+  "name": "Additional Phone Number",
+  "description": "UCDomesticAdditionalLocalNumberOffering",
+  "lastUpdate": "2023-03-23T06:31:38.330Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-12-07T14:23:34.273Z",
+  "updatedDate": "2023-03-23T06:31:38.330Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "yusuf.bozkurt@pia-team.com",
+  "productSpecification": {
+    "id": "UCNumberLicenseSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+    "name": "UCNumberLicenseSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "Additional Phone number",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_ALN_38",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "AdditionalPhoneNumber",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseEntry|OfficeLicenseStandard|OfficeLicensePremium|OfficeLicenseStandardVoice|OfficeLicensePremiumVoice",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "valueType": "true/false",
+      "configurable": false,
+      "description": "Modify Characteristics Allowed",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNumberLicenseSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNumberLicenseSpecification",
+        "name": "UCNumberLicenseSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+      ],
+      "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}

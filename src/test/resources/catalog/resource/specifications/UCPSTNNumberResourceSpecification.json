@@ -1,0 +1,58 @@
+{
+  "id": "UCPSTNNumberResourceSpecification",
+  "href": "/tmf-api/resourceCatalog/v4/physicalResourceSpecification/UCPSTNNumberResourceSpecification",
+  "category": "Number",
+  "description": "UCPSTNNumberResourceSpecification",
+  "isBundle": false,
+  "lifecycleStatus": "Launched",
+  "name": "UCPSTNNumberResourceSpecification",
+  "resourceSpecCharacteristic": [
+    {
+      "configurable": true,
+      "description": "Number",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "number",
+      "valueType": "string"
+    },
+    {
+      "configurable": true,
+      "description": "Main Number Flag",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "mainNumberFlag",
+      "valueType": "string"
+    },
+    {
+      "configurable": true,
+      "description": "Number Type",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "numberType",
+      "valueType": "string",
+      "resourceSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": {
+            "name": "geo"
+          }
+        },
+        {
+          "valueType": "string",
+          "value": {
+            "name": "nonGeo"
+          }
+        },
+        {
+          "valueType": "string",
+          "value": {
+            "name": "nomadic"
+          }
+        }
+      ]
+    }
+  ],
+  "@baseType": "ResourceSpecification",
+  "@schemaLocation": "https://dev1.solutionhub.iot.vodafone.com/tmf-api/resourceCatalog/v4/schema/PhysicalResourceSpecification.json",
+  "@type": "PhysicalResourceSpecification"
+}

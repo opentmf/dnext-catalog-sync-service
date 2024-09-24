@@ -1,0 +1,174 @@
+{
+  "id": "UCRingCentralOfficeLicenseStandardEdition",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralOfficeLicenseStandardEdition",
+  "revision": 41,
+  "version": "1.0",
+  "name": "Vodafone Business UC - Standard Edition",
+  "description": "Vodafone Business UC - Standard Edition",
+  "lastUpdate": "2022-12-07T14:44:13.840Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-01-23T11:39:44.027Z"
+  },
+  "createdDate": "2022-12-07T14:44:14.349Z",
+  "updatedDate": "2023-04-17T11:36:09.687Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "pablofgarciadominguez@gmail.com",
+  "productOfferingRelationship": [],
+  "agreement": [],
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "channel": [],
+  "marketSegment": [],
+  "place": [],
+  "bundledProductOffering": [
+    {
+      "id": "UCDigitalLineLicenseStandardOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseStandardOffering",
+      "name": "Office License - Standard Edition",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCMainNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+      "name": "Main Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCLiveReportsOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCLiveReportsOffering",
+      "name": "Live Reports",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCMeetingsAddOnLicenseOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMeetingsAddOnLicenseOffering",
+      "name": "Meetings Add-On License",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCRingCentralRoomsConnectorOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralRoomsConnectorOffering",
+      "name": "RCV Rooms Connector",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCRingCentralRoomsOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralRoomsOffering",
+      "name": "RingCentral Rooms",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDigitalLineBasicDomesticOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineBasicDomesticOffering",
+      "name": "Limited Extension",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalLocalNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalLocalNumberOffering",
+      "name": "Additional Phone Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalTollFreeNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalTollFreeNumberOffering",
+      "name": "Additional Phone Number - Toll Free",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCDigitalLineLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+        "name": "UCDigitalLineLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "officeLicenseStandardEdition",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": true
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": true,
+  "isSellable": true
+}

@@ -1,0 +1,22 @@
+{
+  "id": "UCPORTINNumberResourceSpecification",
+  "href": "/tmf-api/resourceCatalog/v4/physicalResourceSpecification/UCPORTINNumberResourceSpecification",
+  "category": "Number",
+  "description": "UCPORTINNumberResourceSpecification",
+  "isBundle": false,
+  "lifecycleStatus": "Launched",
+  "name": "UCPORTINNumberResourceSpecification",
+  "resourceSpecCharacteristic": [
+    {
+      "configurable": true,
+      "description": "Number",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "number",
+      "valueType": "string"
+    }
+  ],
+  "@baseType": "ResourceSpecification",
+  "@schemaLocation": "https://dev1.solutionhub.iot.vodafone.com/tmf-api/resourceCatalog/v4/schema/PhysicalResourceSpecification.json",
+  "@type": "PhysicalResourceSpecification"
+}

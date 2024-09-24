@@ -1,0 +1,177 @@
+{
+  "id": "UCMainNumberOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+  "revision": 1,
+  "version": "1.0",
+  "name": "Main Number",
+  "description": "UC Main Number Offering",
+  "lastUpdate": "2022-11-29T14:28:41.219Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-11-29T14:28:41.233Z",
+  "updatedDate": "2022-11-29T14:28:41.233Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCMainNumberSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+    "name": "UCMainNumberSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "siteName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Site Name",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCMainNumberSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+        "name": "UCMainNumberSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "mainNumber",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Main Number",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCMainNumberSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+        "name": "UCMainNumberSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "numberType",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Number Type",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCMainNumberSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+        "name": "UCMainNumberSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCMainNumberSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+        "name": "UCMainNumberSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "PSTNMainNumber",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": true
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "rcUid",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Ring Central User Id",
+      "minCardinality": 0,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCMainNumberSpecification",
+        "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+        "name": "UCMainNumberSpecification",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": true
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": false
+}

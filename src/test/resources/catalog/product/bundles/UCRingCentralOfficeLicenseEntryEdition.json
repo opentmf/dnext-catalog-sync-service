@@ -1,0 +1,92 @@
+{
+  "id": "UCRingCentralOfficeLicenseEntryEdition",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralOfficeLicenseEntryEdition",
+  "revision": 22,
+  "version": "1.0",
+  "name": "Vodafone Business UC - Entry Edition",
+  "description": "Vodafone Business UC - Entry Edition",
+  "lastUpdate": "2022-11-28T13:36:32.468Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-01-23T11:39:44.027Z"
+  },
+  "createdDate": "2022-11-28T13:36:32.484Z",
+  "updatedDate": "2023-04-17T11:36:09.683Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "pablofgarciadominguez@gmail.com",
+  "productOfferingRelationship": [],
+  "agreement": [],
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "channel": [],
+  "marketSegment": [],
+  "place": [],
+  "bundledProductOffering": [
+    {
+      "id": "UCDigitalLineLicenseEntryOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseEntryOffering",
+      "name": "Office License - Entry Edition",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCMainNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+      "name": "Main Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 1,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 1
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalLocalNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalLocalNumberOffering",
+      "name": "Additional Phone Number",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    },
+    {
+      "id": "UCDomesticAdditionalTollFreeNumberOffering",
+      "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDomesticAdditionalTollFreeNumberOffering",
+      "name": "Additional Phone Number - Toll Free",
+      "version": "1.0",
+      "lifecycleStatus": "Launched",
+      "bundledProductOfferingOption": {
+        "numberRelOfferLowerLimit": 0,
+        "numberRelOfferUpperLimit": 1,
+        "numberRelOfferDefault": 0
+      }
+    }
+  ],
+  "productOfferingPrice": [
+    {
+      "id": "8660efb6-afce-4278-afa1-eca6850eabf3",
+      "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productOfferingPrice/8660efb6-afce-4278-afa1-eca6850eabf3",
+      "name": "Price",
+      "version": "1.0",
+      "@referredType": "Product Offering Price"
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": true,
+  "isSellable": true
+}

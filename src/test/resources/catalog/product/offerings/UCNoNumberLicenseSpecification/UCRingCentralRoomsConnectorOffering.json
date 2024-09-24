@@ -1,0 +1,240 @@
+{
+  "id": "UCRingCentralRoomsConnectorOffering",
+  "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralRoomsConnectorOffering",
+  "revision": 0,
+  "version": "1.0",
+  "name": "RCV Rooms Connector",
+  "description": "UCRingCentralRoomsConnectorOffering",
+  "lastUpdate": "2022-12-07T14:29:15.609Z",
+  "lifecycleStatus": "Launched",
+  "validFor": {
+    "startDateTime": "2022-08-23T19:40:29.738Z"
+  },
+  "createdDate": "2022-12-07T14:29:15.627Z",
+  "updatedDate": "2022-12-07T14:29:15.627Z",
+  "createdBy": "cezmi.aslan@pia-team.com",
+  "updatedBy": "cezmi.aslan@pia-team.com",
+  "productSpecification": {
+    "id": "UCNoNumberLicenseSpecification",
+    "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+    "name": "UCNoNumberLicenseSpecification",
+    "@referredType": "ProductSpecification"
+  },
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalogManagement/v4/category/30",
+      "name": "UC",
+      "version": "1.0"
+    }
+  ],
+  "prodSpecCharValueUse": [
+    {
+      "validFor": {},
+      "name": "licenseQuantity",
+      "valueType": "integer",
+      "configurable": true,
+      "description": "License Quantity",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "integer",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": true,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseBusinessName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Business Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RCV Rooms Connector",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseSKU",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License SKU",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "LC_RCON_78",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "licenseVendor",
+      "valueType": "string",
+      "configurable": false,
+      "description": "License Vendor",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RingCentral",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "solutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "RCVRoomsConnector",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "validFor": {},
+      "name": "dependentSolutionName",
+      "valueType": "string",
+      "configurable": false,
+      "description": "Dependent Solution Name",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "string",
+          "value": "OfficeLicenseStandard|OfficeLicensePremium",
+          "valueFrom": "",
+          "valueTo": "",
+          "validFor": {},
+          "regex": "",
+          "@schemaLocation": "",
+          "isDefault": false
+        }
+      ],
+      "mandatory": false,
+      "isVisible": false
+    },
+    {
+      "name": "isProductModifyCharacteristicsAllowed",
+      "valueType": "true/false",
+      "configurable": false,
+      "description": "Modify Characteristics Allowed",
+      "minCardinality": 1,
+      "maxCardinality": 1,
+      "productSpecification": {
+        "id": "UCNoNumberLicenseSpecification",
+        "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCNoNumberLicenseSpecification",
+        "name": "UCNoNumberLicenseSpecification",
+        "version": "1.0",
+        "@referredType": "ProductSpecification"
+      },
+      "productSpecCharacteristicValue": [
+        {
+          "valueType": "true/false",
+          "value": "true",
+          "isDefault": true
+        }
+      ],
+      "id": "e4050346-e9c5-40f3-b82a-8207ff78c896",
+      "mandatory": false,
+      "isVisible": false
+    }
+  ],
+  "@schemaLocation": "/tmf-api/productCatalogManagement/v4/schema/productoffering.json",
+  "isBundle": false,
+  "isSellable": true
+}
