@@ -13,7 +13,6 @@ pia:
     resource-catalog-url: localhost
     service-catalog-url: localhost
     client: default
-    compare-mode: lenient
 
   db-lock:
     lock-acquire-poll-interval: 100
