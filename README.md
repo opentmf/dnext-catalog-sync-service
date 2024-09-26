@@ -367,36 +367,4 @@ Here are some sample log statements from a microservice's startup logs:
 ```
 ## Version History
 ### 1.0.0
-- Initial Release
-
-### 1.0.2
-- Support Service Catalog
-
-### 2.0.0
-- Starts using commons-sh-client 2.0.1
-- Starts using DB-Lock service 2.0.0
-- Start using Java 17
-- Autoconfigure handles catalog synchronization, no beans are exposed to the client
-- Project name changed to sh-catalog-sync-service
-- Project group id have changed to com.pia.sh
-
-### 3.0.0
-- Spring Boot 3 support release.
-
-### 3.0.1
-- Starts using sh-commons-client 3.0.2
-
-### 3.0.2
-- Starts using sh-db-lock-service 3.0.1 (with shutdown hook to release still active locks)
-
-### 3.0.3
-- Updates commons-sh-client version.
-
-### 3.0.4
-- Started supporting versioned entities.
-- Autoconfiguration now checks only the necessary endpoints. For example if no catalog objects related with service domain is available, specifying the service-catalog baseUrl is not necessary.
-- Fixes an equality issue when comparing payloads that has additional members.
-- When a PATCH is decided, started logging the requested and the existing stripped payloads together with the difference details so that the developer can understand the underlying reason behind this decision.
-
-###3.0.5
-- Set Service Domain Sync as multi-versioned for Catalog Type.
+- Initial Version
