@@ -78,22 +78,19 @@ Here are the descriptions of the above folders:
 ### 3. Specify the Catalog Sync Properties
 In your application.yaml, specify the Catalog Sync Properties:
 ```yaml
-solutions-hub:
+pia:
   catalog-sync:
     enabled: true
     catalog-version: 1.0.0
+    client: default
+    product-catalog-url: http://dpc-api-svc/tmf-api/productCatalogManagement/v4
+    resource-catalog-url: http://drc-api-svc/tmf-api/resourceCatalog/v4
+    service-catalog-url: http://drc-api-svc/tmf-api/serviceCatalogManagement/v4
+
 ```
 The Catalog Sync Service remembers the latest synchronized Catalog versions. If the specified catalogVersion is already the latest synchronized version, then no synchronization will take place. Therefore, it is the developers' responsibility to increase the version when any of the Catalog files change, to enforce the Catalog synchronization.
 
-### 4. Specify Catalog Backend URLs
-```yaml
-iot-solutionhub-core-library:
-  product-catalog-url: http://dpc-api-svc/tmf-api/productCatalogManagement/v4
-  resource-catalog-url: http://drc-api-svc/tmf-api/resourceCatalog/v4
-  service-catalog-url: http://drc-api-svc/tmf-api/serviceCatalogManagement/v4
-```
-**Note:** All three URLs must be specified even if the client project does not need some of them.
-### 5. Disable JDBC Repositories
+### 4. Disable JDBC Repositories
 JDBC template is used only to obtain the DB connections by the db lock service and the rest is performed by pure JDBC calls by the DB Lock service. However, Spring Boot does not know this beforehand and checks if JDBC repositories can also be used as the repository implementations. In order to let Spring Boot know that we don't want to use JDBC repositories, the following should be added to application.yml file:
 
 ```yaml
@@ -103,10 +100,10 @@ spring:
       repositories:
         enabled: false
 ```
-### 6. Skip Catalog Sync in IT Tests
+### 5. Skip Catalog Sync in IT Tests
 In order to skip the Catalog Sync in the IT tests, disable the Catalog Sync Service in your application-it.yml file:
 ```yaml
-solutions-hub:
+pia:
   db-lock:
     create-tables: false
   catalog-sync:
