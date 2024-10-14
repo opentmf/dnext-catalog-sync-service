@@ -66,7 +66,7 @@ class CatalogSyncServiceIT {
 
   @Autowired WebClient webClient;
   @Autowired TokenService tokenService;
-  @Autowired BaseClientProperties<?> clientProperties;
+  @Autowired BaseClientProperties clientProperties;
   @Autowired DbLockService dbLockService;
   @Autowired CatalogSyncProperties catalogSyncProperties;
   @Autowired private JdbcTemplate jdbcTemplate;

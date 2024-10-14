@@ -31,7 +31,7 @@ public class CatalogClientImpl implements CatalogClient {
 
   private final WebClient webClient;
   private final TokenService tokenService;
-  private final BaseClientProperties<?> clientProperties;
+  private final BaseClientProperties clientProperties;
 
   @Override
   public Mono<String> get(String baseUrl, SingleContext catalogContext) {

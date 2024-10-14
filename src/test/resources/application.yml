@@ -39,3 +39,9 @@ pia:
             password: pass
             scope: openid
             grant_type: password
+    basic:
+      basic1:
+        connection-provider-name: basic1
+        token-config:
+          username: user
+          password: pass

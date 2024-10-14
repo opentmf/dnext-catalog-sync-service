@@ -368,3 +368,6 @@ Here are some sample log statements from a microservice's startup logs:
 ## Version History
 ### 1.0.0
 - Initial Version
+### 1.0.1
+- Updates to latest pia-web-clients and pia-db-lock-service
+- Changes the catalog creation order to the following: Resource Spec > Service Spec -> Product Category, Spec, Offerings and Bundles

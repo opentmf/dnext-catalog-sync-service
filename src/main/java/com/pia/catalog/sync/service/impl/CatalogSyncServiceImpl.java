@@ -105,12 +105,12 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
   }
 
   private void doSync(OverallContext context) {
-    syncProductCategories(context)
+    syncResourceSpecifications(context)
+        .then(Mono.defer(() -> syncServiceSpecifications(context)))
+        .then(Mono.defer(() -> syncProductCategories(context)))
         .then(Mono.defer(() -> syncProductSpecifications(context)))
         .then(Mono.defer(() -> syncProductOfferings(context)))
         .then(Mono.defer(() -> syncBundles(context)))
-        .then(Mono.defer(() -> syncResourceSpecifications(context)))
-        .then(Mono.defer(() -> syncServiceSpecifications(context)))
         .block();
     logDeploymentDetails(context);
   }

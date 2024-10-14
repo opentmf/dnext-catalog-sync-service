@@ -41,7 +41,7 @@ public class CatalogSyncAutoConfiguration {
     var client = catalogSyncProperties.getClient();
     var webClient = (WebClient) ctx.getBean(client + "WebClient");
     var tokenService = (TokenService) ctx.getBean(client + "TokenService");
-    var clientProperties = (BaseClientProperties<?>) ctx.getBean(client + "ClientProperties");
+    var clientProperties = (BaseClientProperties) ctx.getBean(client + "ClientProperties");
     var catalogClient = new CatalogClientImpl(webClient, tokenService, clientProperties);
     var catalogSyncService = new CatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
 
