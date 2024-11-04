@@ -39,11 +39,9 @@ To use this service from a microservice, the following six small steps are neces
 Add this section:
 
 ```xml
-
 <dependency>
   <groupId>com.pia.sh</groupId>
   <artifactId>sh-catalog-sync-service</artifactId>
-  <version>3.0.2</version>
 </dependency>
 ```
 ### 2. Reorganize the Catalog files
@@ -62,16 +60,16 @@ catalog
   service
     specifications
 ```
-Here are the descriptions of the above folders:
+The following table is ordered by the synchronization and contains the descriptions of the above folders:
 
-| Folder                  | Contains                                    |
-|-------------------------|---------------------------------------------|
-| product/bundles         | the bundle product offering definitions     |
-| product/categories      | the category definitions                    |
-| product/offerings       | the non-bundle product offering definitions |
-| product/specifications  | the product specifications                  |
-| resource/specifications | the resource specifications                 |
-| service/specifications  | the service specifications                  |
+| Order | Folder                  | Contains                                    |
+|:-----:|-------------------------|---------------------------------------------|
+|   1   | resource/specifications | the resource specifications                 |
+|   2   | service/specifications  | the service specifications                  |
+|   3   | product/categories      | the category definitions                    |
+|   4   | product/specifications  | the product specifications                  |
+|   5   | product/offerings       | the non-bundle product offering definitions |
+|   6   | product/bundles         | the bundle product offering definitions     |
 
 **Note:** _Inner sub folders within the base sub folders are supported._
 
@@ -372,4 +370,6 @@ Here are some sample log statements from a microservice's startup logs:
 - Updates to latest pia-web-clients and pia-db-lock-service
 - Changes the catalog creation order to the following: Resource Spec > Service Spec -> Product Category, Spec, Offerings and Bundles
 ### 1.0.2
+- Updates to latest pia-web-clients and pia-db-lock-service
+### 1.0.3
 - Updates to latest pia-web-clients and pia-db-lock-service
