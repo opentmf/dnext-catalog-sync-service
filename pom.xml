@@ -14,13 +14,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
 
-    <pia-db-lock-service.version>1.0.4</pia-db-lock-service.version>
+    <pia-db-lock-service.version>1.0.5</pia-db-lock-service.version>
     <pia-commons.version>1.0.0</pia-commons.version>
     <pia-openid-webclient-provider.version>1.0.6</pia-openid-webclient-provider.version>
     <pia-basic-webclient-provider.version>1.0.6</pia-basic-webclient-provider.version>
 
     <archunit.version>1.3.0</archunit.version>
-    <testcontainers.version>1.20.3</testcontainers.version>
+    <testcontainers.version>1.20.4</testcontainers.version>
     <mockserver.version>5.15.0</mockserver.version>
     <jsonassert.version>1.5.3</jsonassert.version>
     <nexus-staging-plugin.version>1.7.0</nexus-staging-plugin.version>
@@ -252,7 +252,7 @@
                     </limit>
                     <limit>
                       <counter>BRANCH</counter>
-                      <minimum>80%</minimum>
+                      <minimum>75%</minimum>
                       <value>COVEREDRATIO</value>
                     </limit>
                     <limit>

@@ -81,17 +81,17 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     try {
       String requestedVersion = catalogSyncProperties.getCatalogVersion();
       lock = dbLockService.acquireLock(LockType.CATALOG, requestedVersion);
-      if (lock.isUpgradeRequired(requestedVersion) ||
-          lock.isDowngradeRequired(requestedVersion,
-              catalogSyncProperties.getDowngradeAllowedAfter())) {
+      if (lock.isUpgrade()
+          || (lock.isDowngrade()
+              && lock.isDowngradeAllowed(catalogSyncProperties.getDowngradeAllowedAfter())))
+      {
         doSync(context);
         releaseLock(lock, context.getTouchedCount());
         lockReleased = true;
       } else {
         dbLockService.releaseLock(lock, false);
         lockReleased = true;
-        log.info("Catalog files are already up-to-date for version {}.",
-            lock.getPreviousLockVersion());
+        log.info("Catalog files are already up-to-date for version {}.", lock.getLockVersion());
       }
     } catch (Exception e) {
       dbLockService.releaseLock(lock, false);
