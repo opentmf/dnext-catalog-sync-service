@@ -375,3 +375,7 @@ Here are some sample log statements from a microservice's startup logs:
 - Updates to latest pia-web-clients and pia-db-lock-service
 ### 1.0.4
 - Updates to the latest pia-db-lock-service 1.0.5
+### 1.0.5
+- Updates pia-db-lock-service to 1.0.6
+- Updates Spring Boot to 3.4.0
+- Updates pia-web-clients to 1.0.7
