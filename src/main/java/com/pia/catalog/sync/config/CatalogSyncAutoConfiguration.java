@@ -2,10 +2,8 @@ package com.pia.catalog.sync.config;
 
 import com.pia.catalog.sync.client.impl.CatalogClientImpl;
 import com.pia.catalog.sync.service.impl.CatalogSyncServiceImpl;
-import com.pia.client.basic.config.BasicWebClientProviderAutoConfiguration;
 import com.pia.client.common.model.BaseClientProperties;
 import com.pia.client.common.service.api.TokenService;
-import com.pia.client.openid.config.OpenidWebClientProviderAutoConfiguration;
 import com.pia.db.lock.config.DbLockAutoConfiguration;
 import com.pia.db.lock.service.api.DbLockService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,19 +17,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 /**
  * @author Gokhan Demir
  */
-@AutoConfiguration(after = {
-    DbLockAutoConfiguration.class,
-    OpenidWebClientProviderAutoConfiguration.class,
-    BasicWebClientProviderAutoConfiguration.class
-})
-@ConditionalOnBean(
-    name = "dbLockService",
-    value = TokenService.class
-)
-@ConditionalOnProperty("pia.catalog-sync.enabled")
-@EnableConfigurationProperties({
-    CatalogSyncProperties.class
-})
+@AutoConfiguration(
+    after = DbLockAutoConfiguration.class,
+    afterName = {
+      "com.pia.client.openid.config.OpenidWebClientProviderAutoConfiguration",
+      "com.pia.client.basic.config.BasicWebClientProviderAutoConfiguration"
+    })
+@ConditionalOnBean(name = "dbLockService")
+@EnableConfigurationProperties({CatalogSyncProperties.class})
+@ConditionalOnProperty(
+    prefix = "pia.catalog-sync",
+    name = "enabled",
+    havingValue = "true",
+    matchIfMissing = true)
 @Slf4j
 public class CatalogSyncAutoConfiguration {
 

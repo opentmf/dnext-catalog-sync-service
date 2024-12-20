@@ -379,3 +379,8 @@ Here are some sample log statements from a microservice's startup logs:
 - Updates pia-db-lock-service to 1.0.6
 - Updates Spring Boot to 3.4.0
 - Updates pia-web-clients to 1.0.7
+### 1.0.6
+- Updates pia-db-lock-service to 1.0.7
+- Fixes the autoconfiguration dependencies
+  - Configures if the configuration property pia.catalog-sync.enabled is missing, since its default value is true
+  - Specified the optional dependent web client configurations in afterName section to get rid of NoClassDefFoundError if a certain web client provider is not in the classpath.
