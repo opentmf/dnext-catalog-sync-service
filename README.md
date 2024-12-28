@@ -384,3 +384,6 @@ Here are some sample log statements from a microservice's startup logs:
 - Fixes the autoconfiguration dependencies
   - Configures if the configuration property pia.catalog-sync.enabled is missing, since its default value is true
   - Specified the optional dependent web client configurations in afterName section to get rid of NoClassDefFoundError if a certain web client provider is not in the classpath.
+### 1.0.7
+- Updates to pia-web-clients 1.0.8, for fewer dependencies for the reactive WebClient.
+- Updates Spring Boot to 3.4.1
