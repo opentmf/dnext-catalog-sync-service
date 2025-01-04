@@ -20,8 +20,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @AutoConfiguration(
     after = DbLockAutoConfiguration.class,
     afterName = {
-      "com.pia.client.openid.config.OpenidWebClientProviderAutoConfiguration",
-      "com.pia.client.basic.config.BasicWebClientProviderAutoConfiguration"
+        "com.pia.client.openid.config.OpenidWebClientProviderAutoConfiguration",
+        "com.pia.client.openid.config.OpenidWebClientsStarterAutoConfiguration",
+        "com.pia.client.basic.config.BasicWebClientProviderAutoConfiguration",
+        "com.pia.client.basic.config.BasicWebClientsStarterAutoConfiguration"
     })
 @ConditionalOnBean(name = "dbLockService")
 @EnableConfigurationProperties({CatalogSyncProperties.class})

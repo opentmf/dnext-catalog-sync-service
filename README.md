@@ -387,3 +387,5 @@ Here are some sample log statements from a microservice's startup logs:
 ### 1.0.7
 - Updates to pia-web-clients 1.0.8, for fewer dependencies for the reactive WebClient.
 - Updates Spring Boot to 3.4.1
+### 1.0.8
+- Added Web Client Starters to the autoconfiguration afterName.
