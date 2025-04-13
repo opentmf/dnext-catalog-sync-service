@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.opentmf.dnext</groupId>
   <artifactId>dnext-catalog-sync-service</artifactId>
-  <version>1.0.9-SNAPSHOT</version>
+  <version>1.0.9</version>
 
   <description>
     Synchronizes versioned resource, service and product catalogs with the DNext
@@ -324,7 +324,7 @@
     <url>https://github.com/opentmf/dnext-catalog-sync-service</url>
     <connection>scm:git:git@github.com:opentmf/dnext-catalog-sync-service.git</connection>
     <developerConnection>scm:git:git@github.com:opentmf/dnext-catalog-sync-service.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>dnext-catalog-sync-service-1.0.9</tag>
   </scm>
 
 </project>
