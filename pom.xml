@@ -4,41 +4,87 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.1</version>
+    <version>3.4.4</version>
   </parent>
-  <groupId>com.pia.commons</groupId>
-  <artifactId>pia-catalog-sync-service</artifactId>
+  <groupId>org.opentmf.dnext</groupId>
+  <artifactId>dnext-catalog-sync-service</artifactId>
   <version>1.0.9-SNAPSHOT</version>
+
+  <description>
+    Synchronizes versioned resource, service and product catalogs with the DNext
+    catalog backends on app startup.
+  </description>
+
+  <url>https://github.com/opentmf/dnext-catalog-sync-service</url>
+
+  <organization>
+    <name>PiA Group</name>
+    <url>https://www.pia-group.net/</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A permissive open-source license</comments>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>gokhanus</id>
+      <name>Gokhan Demir</name>
+      <email>gokhan@opentmf.org</email>
+    </developer>
+    <developer>
+      <id>yusuf-bozkurt</id>
+      <name>Yusuf Bozkurt</name>
+      <email>yusuf.bozkurt@pia-team.com</email>
+    </developer>
+    <developer>
+      <id>cezmi-aslan</id>
+      <name>Cezmi Aslan</name>
+      <email>cezmi.aslan@pia-team.com</email>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
 
-    <pia-db-lock-service.version>1.0.7</pia-db-lock-service.version>
-    <pia-commons.version>1.0.0</pia-commons.version>
-    <pia-openid-webclient-provider.version>1.0.8</pia-openid-webclient-provider.version>
-    <pia-basic-webclient-provider.version>1.0.8</pia-basic-webclient-provider.version>
+    <opentmf-db-lock-service.version>1.0.8</opentmf-db-lock-service.version>
+    <opentmf-commons.version>1.0.5</opentmf-commons.version>
+    <opentmf-openid-webclient-provider.version>1.1.1</opentmf-openid-webclient-provider.version>
+    <opentmf-basic-webclient-provider.version>1.1.1</opentmf-basic-webclient-provider.version>
 
-    <archunit.version>1.3.0</archunit.version>
-    <testcontainers.version>1.20.4</testcontainers.version>
+    <archunit.version>1.4.0</archunit.version>
+    <testcontainers.version>1.20.6</testcontainers.version>
     <mockserver.version>5.15.0</mockserver.version>
     <jsonassert.version>1.5.3</jsonassert.version>
-    <nexus-staging-plugin.version>1.7.0</nexus-staging-plugin.version>
-    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+
+    <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
+    <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+    <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+
+    <sonar.java.source>${java.version}</sonar.java.source>
+    <sonar.java.target>${java.version}</sonar.java.target>
   </properties>
 
   <dependencies>
 
     <!-- Compile time dependencies -->
     <dependency>
-      <groupId>com.pia.commons</groupId>
-      <artifactId>pia-commons</artifactId>
-      <version>${pia-commons.version}</version>
+      <groupId>org.opentmf.commons</groupId>
+      <artifactId>opentmf-commons</artifactId>
+      <version>${opentmf-commons.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.pia.commons</groupId>
-      <artifactId>pia-db-lock-service</artifactId>
-      <version>${pia-db-lock-service.version}</version>
+      <groupId>org.opentmf.util</groupId>
+      <artifactId>opentmf-db-lock-service</artifactId>
+      <version>${opentmf-db-lock-service.version}</version>
     </dependency>
     <dependency>
       <groupId>org.skyscreamer</groupId>
@@ -48,15 +94,15 @@
 
     <!-- Optional dependencies -->
     <dependency>
-      <groupId>com.pia.commons</groupId>
-      <artifactId>pia-openid-webclient-provider</artifactId>
-      <version>${pia-openid-webclient-provider.version}</version>
+      <groupId>org.opentmf.client</groupId>
+      <artifactId>opentmf-openid-webclient-provider</artifactId>
+      <version>${opentmf-openid-webclient-provider.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>com.pia.commons</groupId>
-      <artifactId>pia-basic-webclient-provider</artifactId>
-      <version>${pia-basic-webclient-provider.version}</version>
+      <groupId>org.opentmf.client</groupId>
+      <artifactId>opentmf-basic-webclient-provider</artifactId>
+      <version>${opentmf-basic-webclient-provider.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -136,26 +182,24 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
+        <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <archive>
-            <compress>false</compress>
-          </archive>
+          <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
         </configuration>
       </plugin>
       <plugin>
@@ -164,8 +208,9 @@
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>deploy</phase>
-            <goals><goal>jar-no-fork</goal></goals>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
@@ -175,7 +220,6 @@
         <executions>
           <execution>
             <id>attach-javadocs</id>
-            <phase>deploy</phase>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -188,28 +232,34 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${nexus-staging-plugin.version}</version>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven-gpg-plugin.version}</version>
         <executions>
           <execution>
-            <id>default-deploy</id>
-            <phase>deploy</phase>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
             <goals>
-              <goal>deploy</goal>
+              <goal>sign</goal>
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <serverId>pia-commons-release</serverId>
-          <nexusUrl>https://nexus.dnext-pia.com/</nexusUrl>
-          <skipStaging>true</skipStaging>
+          <useReleaseProfile>false</useReleaseProfile>
+          <goals>deploy</goals>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>${central-publishing-maven-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>publish-to-central</publishingServerId>
+          <autoPublish>true</autoPublish>
         </configuration>
       </plugin>
       <plugin>
@@ -271,20 +321,10 @@
   </build>
 
   <scm>
-    <connection>scm:git:git@github.com:pia-commons/pia-catalog-sync-service.git</connection>
-    <developerConnection>scm:git:git@github.com:pia-commons/pia-catalog-sync-service.git</developerConnection>
+    <url>https://github.com/opentmf/dnext-catalog-sync-service</url>
+    <connection>scm:git:git@github.com:opentmf/dnext-catalog-sync-service.git</connection>
+    <developerConnection>scm:git:git@github.com:opentmf/dnext-catalog-sync-service.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
-  <distributionManagement>
-    <repository>
-      <id>pia-commons-release</id>
-      <url>https://nexus.dnext-pia.com/repository/pia-commons-release/</url>
-    </repository>
-    <snapshotRepository>
-      <id>pia-commons-snapshot</id>
-      <url>https://nexus.dnext-pia.com/repository/pia-commons-snapshot/</url>
-    </snapshotRepository>
-  </distributionManagement>
 
 </project>

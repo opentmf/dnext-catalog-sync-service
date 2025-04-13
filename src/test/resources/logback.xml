@@ -5,9 +5,10 @@
     </encoder>
   </appender>
 
-  <logger name="com.pia" level="TRACE" />
+  <logger name="org.opentmf" level="TRACE" />
   <logger name="org.mockserver" level="WARN" />
-  <logger name="org.zalando.logbook" level="TRACE" />
+  <logger name="org.zalando.logbook" level="INFO" />
+  <logger name="reactor.netty.http.client" level="WARN"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT" />

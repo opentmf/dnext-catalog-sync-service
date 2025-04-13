@@ -1,1 +1,1 @@
-com.pia.catalog.sync.config.CatalogSyncAutoConfiguration
+org.opentmf.catalog.sync.config.CatalogSyncAutoConfiguration
