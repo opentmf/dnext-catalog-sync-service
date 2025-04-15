@@ -1,13 +1,13 @@
 package org.opentmf.catalog.sync.exception;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 /**
  * @author Gokhan Demir
  */
 public class CatalogGetException extends CatalogSyncException {
 
-  public CatalogGetException(HttpStatus httpStatus, String message) {
-    super(httpStatus, message);
+  public CatalogGetException(HttpStatusCode httpStatusCode, String message) {
+    super(httpStatusCode, message);
   }
 }

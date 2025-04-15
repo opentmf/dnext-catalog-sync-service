@@ -693,3 +693,5 @@ Payload2: {"agreement":[],"bundledProductOffering":[{"id":"UCDigitalLineLicenseS
 - Added Web Client Starters to the autoconfiguration afterName.
 ### 1.0.9
 - Initial Open Source Version
+### 1.1.0
+- Fixes the exception constructor parameters.

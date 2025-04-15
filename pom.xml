@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.opentmf.dnext</groupId>
   <artifactId>dnext-catalog-sync-service</artifactId>
-  <version>1.0.10-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
 
   <description>
     Synchronizes versioned resource, service and product catalogs with the DNext
