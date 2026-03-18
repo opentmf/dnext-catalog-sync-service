@@ -1,15 +1,30 @@
 package org.opentmf.catalog.sync.service;
 
-import static org.opentmf.catalog.sync.util.CatalogUtil.version0;
-import static org.opentmf.catalog.sync.util.CatalogUtil.version1;
-import static org.opentmf.catalog.sync.util.TypeUtil.asString;
-import static org.opentmf.catalog.sync.util.WebUtil.uri;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.verify.VerificationTimes.never;
 import static org.mockserver.verify.VerificationTimes.once;
+import static org.opentmf.catalog.sync.util.CatalogUtil.version0;
+import static org.opentmf.catalog.sync.util.CatalogUtil.version1;
+import static org.opentmf.catalog.sync.util.TypeUtil.asString;
+import static org.opentmf.catalog.sync.util.WebUtil.uri;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.net.URI;
+import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.mockserver.integration.ClientAndServer;
+import org.mockserver.matchers.MatchType;
+import org.mockserver.model.JsonBody;
+import org.mockserver.model.MediaType;
 import org.opentmf.catalog.sync.client.impl.CatalogClientImpl;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
@@ -26,23 +41,6 @@ import org.opentmf.client.common.model.BaseClientProperties;
 import org.opentmf.client.common.service.api.TokenService;
 import org.opentmf.commons.util.JacksonUtil;
 import org.opentmf.db.lock.service.api.DbLockService;
-import java.net.URI;
-import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.mockserver.integration.ClientAndServer;
-import org.mockserver.matchers.MatchType;
-import org.mockserver.matchers.Times;
-import org.mockserver.model.JsonBody;
-import org.mockserver.model.MediaType;
-import org.mockserver.verify.VerificationTimes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,7 +74,8 @@ class CatalogSyncServiceIT {
   @BeforeAll
   void beforeAll() {
     var catalogClient = new CatalogClientImpl(webClient, tokenService, clientProperties);
-    catalogSyncService = new CatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
+    catalogSyncService =
+        new CatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
     catalogSyncProperties.setProductCatalogUrl(BASE_URL);
     catalogSyncProperties.setResourceCatalogUrl(BASE_URL);
     catalogSyncProperties.setServiceCatalogUrl(BASE_URL);
@@ -127,44 +126,54 @@ class CatalogSyncServiceIT {
   @Test
   void TestSync_withGetException_stopsSynchronizing() {
     get(".*", HttpStatus.CONFLICT, "{\"error\": \"Test error\"}");
-    IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
-        () -> catalogSyncService.ensureCatalogConsistency());
+    IllegalStateException e =
+        Assertions.assertThrows(
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
     Assertions.assertInstanceOf(CatalogGetException.class, e.getCause());
     Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
-    Assertions.assertEquals("CatalogGetException: {\"error\": \"Test error\"}",
-        ExceptionUtils.getRootCauseMessage(e));
+    Assertions.assertEquals(
+        "CatalogGetException: {\"error\": \"Test error\"}", ExceptionUtils.getRootCauseMessage(e));
     Throwable cause = ExceptionUtils.getRootCause(e);
-    Assertions.assertEquals("CatalogGetException{httpStatus=409 CONFLICT, "
-        + "message={\"error\": \"Test error\"}}", cause.toString());
+    Assertions.assertEquals(
+        "CatalogGetException{httpStatus=409 CONFLICT, " + "message={\"error\": \"Test error\"}}",
+        cause.toString());
   }
 
   @Test
   void testSync_withPostException_stopsSynchronizing() {
     get(".*", HttpStatus.NOT_FOUND);
     post(".*", HttpStatus.BAD_REQUEST);
-    IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
-        () -> catalogSyncService.ensureCatalogConsistency());
+    IllegalStateException e =
+        Assertions.assertThrows(
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
     Assertions.assertInstanceOf(CatalogPostException.class, e.getCause());
     Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
-    Assertions.assertEquals("CatalogPostException: {\"message\":\"Test Post Error\"}",
+    Assertions.assertEquals(
+        "CatalogPostException: {\"message\":\"Test Post Error\"}",
         ExceptionUtils.getRootCauseMessage(e));
     Throwable cause = ExceptionUtils.getRootCause(e);
-    Assertions.assertEquals("CatalogPostException{httpStatus=400 BAD_REQUEST, "
-        + "message={\"message\":\"Test Post Error\"}}", cause.toString());
+    Assertions.assertEquals(
+        "CatalogPostException{httpStatus=400 BAD_REQUEST, "
+            + "message={\"message\":\"Test Post Error\"}}",
+        cause.toString());
   }
 
   @Test
   void testSync_withPatchErrorExpectations_stopSynchronizing() {
     setupAllPatchExpectationsForError();
-    IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
-        () -> catalogSyncService.ensureCatalogConsistency());
+    IllegalStateException e =
+        Assertions.assertThrows(
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
     Assertions.assertInstanceOf(CatalogPatchException.class, e.getCause());
     Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
-    Assertions.assertEquals("CatalogPatchException: {\"message\":\"Test Patch Error\"}",
+    Assertions.assertEquals(
+        "CatalogPatchException: {\"message\":\"Test Patch Error\"}",
         ExceptionUtils.getRootCauseMessage(e));
     Throwable cause = ExceptionUtils.getRootCause(e);
-    Assertions.assertEquals("CatalogPatchException{httpStatus=400 BAD_REQUEST, "
-        + "message={\"message\":\"Test Patch Error\"}}", cause.toString());
+    Assertions.assertEquals(
+        "CatalogPatchException{httpStatus=400 BAD_REQUEST, "
+            + "message={\"message\":\"Test Patch Error\"}}",
+        cause.toString());
   }
 
   private void setupAllGetExpectations() {
@@ -181,7 +190,8 @@ class CatalogSyncServiceIT {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         String patchResponseBody = ResourceUtil.readAsString(resource);
-        String patchRequestBody = CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
+        String patchRequestBody =
+            CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
         Map<String, Object> map = JacksonUtil2.readAsMap(resource);
         String id = asString(map.get("id"));
         map.put("name", "Different Value");
@@ -195,7 +205,8 @@ class CatalogSyncServiceIT {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         String patchResponseBody = ResourceUtil.readAsString(resource);
-        String patchRequestBody = CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
+        String patchRequestBody =
+            CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
         Map<String, Object> map = JacksonUtil2.readAsMap(resource);
         String id = asString(map.get("id"));
         map.put("name", "Different Value");
@@ -218,12 +229,10 @@ class CatalogSyncServiceIT {
             setupPostOk(catalogType, stripValidFor(version0(requestBody)), version0(json));
             setupPostOk(catalogType, stripValidFor(version1(requestBody)), version1(json));
           }
-          case SINGLE_VERSIONED -> {
+          case SINGLE_VERSIONED ->
             setupPostOk(catalogType, stripValidFor(version1(requestBody)), version1(json));
-          }
-          case NORMAL -> {
+          case NORMAL ->
             setupPostOk(catalogType, requestBody, json);
-          }
         }
       }
     }
@@ -236,31 +245,55 @@ class CatalogSyncServiceIT {
   }
 
   private void setupGetNotFound(CatalogType catalogType, String id) {
-    URI uri = WebUtil.uri(BASE_URL, catalogType.getGetEndpoint(), id);
-    get(uri.getPath(), HttpStatus.NOT_FOUND);
+    for (String endpoint : catalogType.getGetEndpoints()) {
+      URI uri = WebUtil.uri(BASE_URL, endpoint, id);
+      get(uri.getPath(), HttpStatus.NOT_FOUND);
+    }
   }
 
-  private void setupGetFound(CatalogType catalogType, String id, String body) {
-    URI uri = WebUtil.uri(BASE_URL, catalogType.getGetEndpoint(), id);
-    get(uri.getPath(), HttpStatus.OK, body);
+  private void setupGetFound(
+      CatalogType catalogType, String id, String body) {
+    for (String endpoint : catalogType.getGetEndpoints()) {
+      URI uri = WebUtil.uri(BASE_URL, endpoint, id);
+      get(uri.getPath(), HttpStatus.OK, body);
+    }
   }
 
-  private void setupPostOk(CatalogType catalogType, String requestBody, String responseBody) {
-    URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint());
-    post(uri.getPath(), requestBody, HttpStatus.CREATED, responseBody);
-  }
-
-  private void setupPatchOk(CatalogType catalogType, String id, String requestBody,
+  private void setupPostOk(
+      CatalogType catalogType,
+      String requestBody,
       String responseBody) {
-    URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(), id);
-    patch(uri.getPath(), MediaType.parse(catalogType.getPatchType().toString()),
-        requestBody, HttpStatus.OK, responseBody);
+    for (String endpoint : catalogType.getPostPatchEndpoints()) {
+      URI uri = uri(BASE_URL, endpoint);
+      post(uri.getPath(), requestBody, HttpStatus.CREATED, responseBody);
+    }
   }
 
-  private void setupPatchError(CatalogType catalogType, String id, String requestBody) {
-    URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(), id);
-    patch(uri.getPath(), MediaType.parse(catalogType.getPatchType().toString()),
-        requestBody, HttpStatus.BAD_REQUEST, "{\"message\":\"Test Patch Error\"}");
+  private void setupPatchOk(
+      CatalogType catalogType,
+      String id,
+      String requestBody,
+      String responseBody) {
+    for (String endpoint : catalogType.getPostPatchEndpoints()) {
+      URI uri = uri(BASE_URL, endpoint, id);
+      patch(
+          uri.getPath(),
+          MediaType.parse(catalogType.getPatchType().toString()),
+          requestBody,
+          HttpStatus.OK,
+          responseBody);
+    }
+  }
+
+  private void setupPatchError(
+      CatalogType catalogType, String id, String requestBody) {
+    for (String endpoint : catalogType.getPostPatchEndpoints()) {
+      URI uri = uri(BASE_URL, endpoint, id);
+      patch(uri.getPath(), MediaType.parse(catalogType.getPatchType().toString()),
+          requestBody,
+          HttpStatus.BAD_REQUEST,
+          "{\"message\":\"Test Patch Error\"}");
+    }
   }
 
   private void verifyAllPatchExpectations() {
@@ -268,15 +301,11 @@ class CatalogSyncServiceIT {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         Map<String, Object> map = JacksonUtil2.readAsMap(resource);
         String id = asString(map.get("id"));
-        URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(), id);
+        URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(map), id);
         if (catalogType.isPatchable()) {
-          MOCK_SERVER.verify(
-              request().withMethod("PATCH").withPath(uri.getPath()), once()
-          );
+          MOCK_SERVER.verify(request().withMethod("PATCH").withPath(uri.getPath()), once());
         } else {
-          MOCK_SERVER.verify(
-              request().withMethod("PATCH").withPath(uri.getPath()), VerificationTimes.never()
-          );
+          MOCK_SERVER.verify(request().withMethod("PATCH").withPath(uri.getPath()), never());
         }
       }
     }
@@ -287,42 +316,37 @@ class CatalogSyncServiceIT {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         Map<String, Object> map = JacksonUtil2.readAsMap(resource);
         String id = asString(map.get("id"));
-        URI uri = uri(BASE_URL, catalogType.getGetEndpoint(), id);
+        URI uri = uri(BASE_URL, catalogType.getGetEndpoint(map), id);
         MOCK_SERVER.verify(request().withMethod("GET").withPath(uri.getPath()), once());
         MOCK_SERVER.verify(request().withMethod("PATCH").withPath(uri.getPath()), never());
       }
     }
   }
 
-  private static void post(String path, String requestBody, HttpStatus responseStatus,
-      String responseBody) {
+  private static void post(
+      String path, String requestBody, HttpStatus responseStatus, String responseBody) {
     MOCK_SERVER
         .when(
             request()
                 .withMethod("POST")
                 .withPath(path)
-                .withBody(new JsonBody(requestBody, MatchType.ONLY_MATCHING_FIELDS)),
-            Times.once())
-        .respond(
-            response()
-                .withBody(responseBody)
-                .withStatusCode(responseStatus.value()));
+                .withBody(new JsonBody(requestBody, MatchType.ONLY_MATCHING_FIELDS)))
+        .respond(response().withBody(responseBody).withStatusCode(responseStatus.value()));
   }
 
   private static void post(String path, HttpStatus responseStatus) {
     MOCK_SERVER
-        .when(
-            request()
-                .withMethod("POST")
-                .withPath(path),
-            Times.once())
+        .when(request().withMethod("POST").withPath(path))
         .respond(
             response()
                 .withBody("{\"message\":\"Test Post Error\"}")
                 .withStatusCode(responseStatus.value()));
   }
 
-  private static void patch(String path, MediaType contentType, String requestBody,
+  private static void patch(
+      String path,
+      MediaType contentType,
+      String requestBody,
       HttpStatus responseStatus,
       String responseBody) {
     MOCK_SERVER
@@ -331,36 +355,19 @@ class CatalogSyncServiceIT {
                 .withMethod("PATCH")
                 .withPath(path)
                 .withContentType(contentType)
-                .withBody(requestBody),
-            Times.once())
-        .respond(
-            response()
-                .withBody(responseBody)
-                .withStatusCode(responseStatus.value()));
+                .withBody(requestBody))
+        .respond(response().withBody(responseBody).withStatusCode(responseStatus.value()));
   }
 
   private static void get(String path, HttpStatus responseStatus) {
     MOCK_SERVER
-        .when(
-            request()
-                .withMethod("GET")
-                .withPath(path),
-            Times.once())
-        .respond(
-            response()
-                .withStatusCode(responseStatus.value()));
+        .when(request().withMethod("GET").withPath(path))
+        .respond(response().withStatusCode(responseStatus.value()));
   }
 
   private static void get(String path, HttpStatus responseStatus, String responseBody) {
     MOCK_SERVER
-        .when(
-            request()
-                .withMethod("GET")
-                .withPath(path),
-            Times.once())
-        .respond(
-            response()
-                .withStatusCode(responseStatus.value())
-                .withBody(responseBody));
+        .when(request().withMethod("GET").withPath(path))
+        .respond(response().withStatusCode(responseStatus.value()).withBody(responseBody));
   }
 }

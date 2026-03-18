@@ -3,7 +3,7 @@ This service synchronizes the catalog definitions under classpath:catalog folder
 
 ## Execution Logic of the Service
 For each Catalog Object under classpath:catalog/ folder:
-- Retrieve the corresponding catalog object from the product catalog or the resource catalog.
+- Retrieve the corresponding catalog object from the product, service, or the resource catalog.
 - IF not found (404):
     - strip the following fields from the Catalog object:
         - href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
@@ -86,6 +86,8 @@ The following table is ordered by the synchronization and contains the descripti
 |   4   | product/specifications  | the product specifications                  |
 |   5   | product/offerings       | the non-bundle product offering definitions |
 |   6   | product/bundles         | the bundle product offering definitions     |
+
+**Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 
 **Note:** _Inner sub folders within the base sub folders are supported._
 

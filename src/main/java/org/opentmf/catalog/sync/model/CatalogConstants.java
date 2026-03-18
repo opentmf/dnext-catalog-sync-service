@@ -29,5 +29,11 @@ public final class CatalogConstants {
   public static final String AT_BASE_TYPE = "@baseType";
   public static final String AT_TYPE = "@type";
 
-
+  // Resource specification endpoint resolution (@type → get/postPatch path segment)
+  public static final String PHYSICAL_RESOURCE_SPECIFICATION_TYPE = "PhysicalResourceSpecification";
+  public static final String LOGICAL_RESOURCE_SPECIFICATION_TYPE = "LogicalResourceSpecification";
+  public static final String PHYSICAL_RESOURCE_SPECIFICATION_ENDPOINT = "physicalResourceSpecification";
+  public static final String LOGICAL_RESOURCE_SPECIFICATION_ENDPOINT = "logicalResourceSpecification";
+  /** Fallback when @type is missing or unknown; also the enum's static get/postPatch value for RESOURCE_SPECIFICATION. */
+  public static final String RESOURCE_SPECIFICATION_ENDPOINT = "resourceSpecification";
 }
