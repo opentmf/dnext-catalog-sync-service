@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.1] - 2026-03-18
+
+### Added
+- Resource specification endpoint resolution by `@type`: `PhysicalResourceSpecification` and `LogicalResourceSpecification` use their respective backend paths; fallback to `resourceSpecification` when `@type` is missing or unknown.
+- CHANGELOG.md with version history (Added / Changed / Fixed sections).
+
+### Changed
+- Maven plugins (source, javadoc, gpg, central-publishing) moved into a `release` profile; use `-P release` for publishing builds.
+
 ## [1.1.0]
 
 ### Fixed
