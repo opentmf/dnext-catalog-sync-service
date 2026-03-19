@@ -1,0 +1,22 @@
+{
+  "id": "SampleLogicalResourceSpecification",
+  "href": "/tmf-api/resourceCatalog/v4/logicalResourceSpecification/SampleLogicalResourceSpecification",
+  "category": "Logical",
+  "description": "SampleLogicalResourceSpecification",
+  "isBundle": false,
+  "lifecycleStatus": "Launched",
+  "name": "SampleLogicalResourceSpecification",
+  "resourceSpecCharacteristic": [
+    {
+      "configurable": true,
+      "description": "Logical",
+      "maxCardinality": 1,
+      "minCardinality": 1,
+      "name": "logical",
+      "valueType": "string"
+    }
+  ],
+  "@baseType": "ResourceSpecification",
+  "@schemaLocation": "https://example.com/tmf-api/resourceCatalog/v4/schema/LogicalResourceSpecification.json",
+  "@type": "LogicalResourceSpecification"
+}

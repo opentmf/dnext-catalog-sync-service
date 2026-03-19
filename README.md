@@ -3,7 +3,7 @@ This service synchronizes the catalog definitions under classpath:catalog folder
 
 ## Execution Logic of the Service
 For each Catalog Object under classpath:catalog/ folder:
-- Retrieve the corresponding catalog object from the product catalog or the resource catalog.
+- Retrieve the corresponding catalog object from the product, service, or the resource catalog.
 - IF not found (404):
     - strip the following fields from the Catalog object:
         - href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
@@ -86,6 +86,8 @@ The following table is ordered by the synchronization and contains the descripti
 |   4   | product/specifications  | the product specifications                  |
 |   5   | product/offerings       | the non-bundle product offering definitions |
 |   6   | product/bundles         | the bundle product offering definitions     |
+
+**Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 
 **Note:** _Inner sub folders within the base sub folders are supported._
 
@@ -665,33 +667,6 @@ Payload2: {"agreement":[],"bundledProductOffering":[{"id":"UCDigitalLineLicenseS
 00:59.820 INFO  [main] o.o.c.s.s.CatalogSyncServiceIT -- Completed initializing the Catalog Sync Service.
 ```
 
-## Version History
-### 1.0.0
-- Initial Version
-### 1.0.1
-- Updates to latest pia-web-clients and pia-db-lock-service
-- Changes the catalog creation order to the following: Resource Spec > Service Spec -> Product Category, Spec, Offerings and Bundles
-### 1.0.2
-- Updates to latest pia-web-clients and pia-db-lock-service
-### 1.0.3
-- Updates to latest pia-web-clients and pia-db-lock-service
-### 1.0.4
-- Updates to the latest pia-db-lock-service 1.0.5
-### 1.0.5
-- Updates pia-db-lock-service to 1.0.6
-- Updates Spring Boot to 3.4.0
-- Updates pia-web-clients to 1.0.7
-### 1.0.6
-- Updates pia-db-lock-service to 1.0.7
-- Fixes the autoconfiguration dependencies
-  - Configures if the configuration property pia.catalog-sync.enabled is missing, since its default value is true
-  - Specified the optional dependent web client configurations in afterName section to get rid of NoClassDefFoundError if a certain web client provider is not in the classpath.
-### 1.0.7
-- Updates to pia-web-clients 1.0.8, for fewer dependencies for the reactive WebClient.
-- Updates Spring Boot to 3.4.1
-### 1.0.8
-- Added Web Client Starters to the autoconfiguration afterName.
-### 1.0.9
-- Initial Open Source Version
-### 1.1.0
-- Fixes the exception constructor parameters.
+## Changelog
+
+Version history and notable changes are maintained in [CHANGELOG.md](CHANGELOG.md).
