@@ -4,12 +4,11 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.verify.VerificationTimes.never;
 import static org.mockserver.verify.VerificationTimes.once;
+import static org.opentmf.catalog.sync.util.CatalogUtil.launchedVersion;
 import static org.opentmf.catalog.sync.util.CatalogUtil.version0;
-import static org.opentmf.catalog.sync.util.CatalogUtil.version1;
 import static org.opentmf.catalog.sync.util.TypeUtil.asString;
 import static org.opentmf.catalog.sync.util.WebUtil.uri;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.net.URI;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -25,20 +24,20 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.matchers.MatchType;
 import org.mockserver.model.JsonBody;
 import org.mockserver.model.MediaType;
-import org.opentmf.catalog.sync.client.impl.CatalogClientImpl;
+import org.opentmf.catalog.sync.client.impl.ReactiveCatalogClientImpl;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
 import org.opentmf.catalog.sync.exception.CatalogPatchException;
 import org.opentmf.catalog.sync.exception.CatalogPostException;
+import org.opentmf.catalog.sync.model.CatalogConstants;
 import org.opentmf.catalog.sync.model.CatalogType;
+import org.opentmf.catalog.sync.model.EntityType;
 import org.opentmf.catalog.sync.service.api.CatalogSyncService;
 import org.opentmf.catalog.sync.service.impl.CatalogSyncServiceImpl;
 import org.opentmf.catalog.sync.util.CatalogUtil;
-import org.opentmf.catalog.sync.util.JacksonUtil2;
 import org.opentmf.catalog.sync.util.ResourceUtil;
 import org.opentmf.catalog.sync.util.WebUtil;
-import org.opentmf.client.common.model.BaseClientProperties;
-import org.opentmf.client.common.service.api.TokenService;
+import org.opentmf.client.common.model.ClientProperties;
 import org.opentmf.commons.util.JacksonUtil;
 import org.opentmf.db.lock.service.api.DbLockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +48,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import tools.jackson.databind.node.ObjectNode;
 
 /**
  * @author Gokhan Demir
@@ -62,9 +62,6 @@ class CatalogSyncServiceIT {
   private static final ClientAndServer MOCK_SERVER = new ClientAndServer();
   private static final String BASE_URL = "http://localhost:" + MOCK_SERVER.getLocalPort();
 
-  @Autowired private WebClient webClient;
-  @Autowired private TokenService tokenService;
-  @Autowired private BaseClientProperties clientProperties;
   @Autowired private DbLockService dbLockService;
   @Autowired private CatalogSyncProperties catalogSyncProperties;
   @Autowired private JdbcTemplate jdbcTemplate;
@@ -73,7 +70,12 @@ class CatalogSyncServiceIT {
 
   @BeforeAll
   void beforeAll() {
-    var catalogClient = new CatalogClientImpl(webClient, tokenService, clientProperties);
+    var webClient = WebClient.builder().build();
+    var tokenService = new org.opentmf.client.reactive.service.impl.NoOpTokenService();
+    var clientProperties = new ClientProperties();
+    clientProperties.setNumRetries(3);
+    clientProperties.setRetryWaitMillis(100);
+    var catalogClient = new ReactiveCatalogClientImpl(webClient, tokenService, clientProperties);
     catalogSyncService =
         new CatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
     catalogSyncProperties.setProductCatalogUrl(BASE_URL);
@@ -179,8 +181,9 @@ class CatalogSyncServiceIT {
   private void setupAllGetExpectations() {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
-        Map<String, Object> map = JacksonUtil2.readAsMap(resource);
+        Map<String, Object> map = CatalogUtil.readAsMap(resource);
         String id = asString(map.get("id"));
+        ensureLaunchedVersion(catalogType, map);
         setupGetFound(catalogType, id, JacksonUtil.objectToJson(map));
       }
     }
@@ -191,12 +194,14 @@ class CatalogSyncServiceIT {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         String patchResponseBody = ResourceUtil.readAsString(resource);
         String patchRequestBody =
-            CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
-        Map<String, Object> map = JacksonUtil2.readAsMap(resource);
+            CatalogUtil.stripForPatch(CatalogUtil.readAsMap(patchResponseBody));
+        Map<String, Object> map = CatalogUtil.readAsMap(resource);
         String id = asString(map.get("id"));
         map.put("name", "Different Value");
+        String existingVersion = ensureLaunchedVersion(catalogType, map);
         setupGetFound(catalogType, id, JacksonUtil.objectToJson(map));
-        setupPatchOk(catalogType, id, patchRequestBody, patchResponseBody);
+        String patchId = multiVersionedId(catalogType, id, existingVersion);
+        setupPatchOk(catalogType, patchId, patchRequestBody, patchResponseBody);
       }
     }
   }
@@ -206,31 +211,56 @@ class CatalogSyncServiceIT {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         String patchResponseBody = ResourceUtil.readAsString(resource);
         String patchRequestBody =
-            CatalogUtil.stripForPatch(JacksonUtil2.readAsMap(patchResponseBody));
-        Map<String, Object> map = JacksonUtil2.readAsMap(resource);
+            CatalogUtil.stripForPatch(CatalogUtil.readAsMap(patchResponseBody));
+        Map<String, Object> map = CatalogUtil.readAsMap(resource);
         String id = asString(map.get("id"));
         map.put("name", "Different Value");
+        String existingVersion = ensureLaunchedVersion(catalogType, map);
         setupGetFound(catalogType, id, JacksonUtil.objectToJson(map));
-        setupPatchError(catalogType, id, patchRequestBody);
+        String patchId = multiVersionedId(catalogType, id, existingVersion);
+        setupPatchError(catalogType, patchId, patchRequestBody);
       }
     }
+  }
+
+  /**
+   * For MULTI_VERSIONED entities, the GET response must carry a non-zero version so that
+   * the sync service treats it as a launched version. Returns the version string.
+   */
+  private String ensureLaunchedVersion(CatalogType catalogType, Map<String, Object> map) {
+    if (catalogType.getEntityType() != EntityType.MULTI_VERSIONED) {
+      return null;
+    }
+    String version = asString(map.get(CatalogConstants.VERSION));
+    if (version == null || "0".equals(version)) {
+      map.put(CatalogConstants.VERSION, "1");
+      return "1";
+    }
+    return version;
+  }
+
+  private String multiVersionedId(CatalogType catalogType, String id, String version) {
+    if (catalogType.getEntityType() == EntityType.MULTI_VERSIONED && version != null) {
+      return id + ":(version=" + version + ")";
+    }
+    return id;
   }
 
   private void setupAllCreateExpectations() {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
         String json = ResourceUtil.readAsString(resource);
-        Map<String, Object> map = JacksonUtil2.readAsMap(json);
+        Map<String, Object> map = CatalogUtil.readAsMap(json);
         String requestBody = CatalogUtil.stripForPost(map);
         String id = asString(map.get("id"));
         setupGetNotFound(catalogType, id);
         switch (catalogType.getEntityType()) {
           case MULTI_VERSIONED -> {
             setupPostOk(catalogType, stripValidFor(version0(requestBody)), version0(json));
-            setupPostOk(catalogType, stripValidFor(version1(requestBody)), version1(json));
+            setupPostOk(catalogType, stripValidFor(launchedVersion(requestBody)), launchedVersion(json));
           }
           case SINGLE_VERSIONED ->
-            setupPostOk(catalogType, stripValidFor(version1(requestBody)), version1(json));
+            setupPostOk(catalogType, stripValidFor(launchedVersion(requestBody)), launchedVersion(json));
           case NORMAL ->
             setupPostOk(catalogType, requestBody, json);
         }
@@ -239,9 +269,9 @@ class CatalogSyncServiceIT {
   }
 
   private String stripValidFor(String requestBody) {
-    var tree = (ObjectNode) org.opentmf.commons.util.JacksonUtil.jsonToTree(requestBody);
+    var tree = (ObjectNode) JacksonUtil.jsonToTree(requestBody);
     tree.remove("validFor");
-    return org.opentmf.commons.util.JacksonUtil.objectToJson(tree);
+    return JacksonUtil.objectToJson(tree);
   }
 
   private void setupGetNotFound(CatalogType catalogType, String id) {
@@ -299,9 +329,11 @@ class CatalogSyncServiceIT {
   private void verifyAllPatchExpectations() {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
-        Map<String, Object> map = JacksonUtil2.readAsMap(resource);
+        Map<String, Object> map = CatalogUtil.readAsMap(resource);
         String id = asString(map.get("id"));
-        URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(map), id);
+        String version = ensureLaunchedVersion(catalogType, map);
+        String patchId = multiVersionedId(catalogType, id, version);
+        URI uri = uri(BASE_URL, catalogType.getPostPatchEndpoint(map), patchId);
         if (catalogType.isPatchable()) {
           MOCK_SERVER.verify(request().withMethod("PATCH").withPath(uri.getPath()), once());
         } else {
@@ -314,11 +346,10 @@ class CatalogSyncServiceIT {
   private void verifyAllGetExpectations() {
     for (CatalogType catalogType : CatalogType.values()) {
       for (Resource resource : CatalogUtil.getCatalogs(catalogType)) {
-        Map<String, Object> map = JacksonUtil2.readAsMap(resource);
+        Map<String, Object> map = CatalogUtil.readAsMap(resource);
         String id = asString(map.get("id"));
         URI uri = uri(BASE_URL, catalogType.getGetEndpoint(map), id);
         MOCK_SERVER.verify(request().withMethod("GET").withPath(uri.getPath()), once());
-        MOCK_SERVER.verify(request().withMethod("PATCH").withPath(uri.getPath()), never());
       }
     }
   }
@@ -368,6 +399,7 @@ class CatalogSyncServiceIT {
   private static void get(String path, HttpStatus responseStatus, String responseBody) {
     MOCK_SERVER
         .when(request().withMethod("GET").withPath(path))
-        .respond(response().withStatusCode(responseStatus.value()).withBody(responseBody));
+        .respond(response().withStatusCode(responseStatus.value())
+            .withBody(responseBody, MediaType.APPLICATION_JSON));
   }
 }

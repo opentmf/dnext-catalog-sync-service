@@ -1,32 +1,35 @@
 package org.opentmf.catalog.sync.service.impl;
 
+import static org.opentmf.catalog.sync.util.WebUtil.uri;
 
+import java.net.URI;
+import java.util.Arrays;
+import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.opentmf.catalog.sync.client.api.CatalogClient;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
 import org.opentmf.catalog.sync.exception.CatalogPatchException;
 import org.opentmf.catalog.sync.exception.CatalogPostException;
 import org.opentmf.catalog.sync.model.Catalog;
+import org.opentmf.catalog.sync.model.CatalogConstants;
 import org.opentmf.catalog.sync.model.CatalogType;
+import org.opentmf.catalog.sync.model.EntityType;
 import org.opentmf.catalog.sync.model.OverallContext;
 import org.opentmf.catalog.sync.model.SingleContext;
 import org.opentmf.catalog.sync.service.api.CatalogSyncService;
 import org.opentmf.catalog.sync.util.CatalogUtil;
-import org.opentmf.catalog.sync.util.JacksonUtil2;
+import org.opentmf.catalog.sync.util.EndpointResolver;
 import org.opentmf.catalog.sync.util.TypeUtil;
+import org.opentmf.commons.util.JacksonUtil;
 import org.opentmf.commons.util.UrlUtil;
 import org.opentmf.db.lock.exception.DbLockException;
 import org.opentmf.db.lock.model.AcquiredLock;
 import org.opentmf.db.lock.model.LockType;
 import org.opentmf.db.lock.service.api.DbLockService;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
@@ -139,41 +142,39 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     }
   }
 
+  // ── Sync entry points per catalog domain ──────────────────────────────
+
   private Mono<Void> syncProductCategories(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATEGORY);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
-        CatalogType.PRODUCT_CATEGORY, catalogs);
+        CatalogType.PRODUCT_CATEGORY, CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATEGORY));
   }
 
   private Mono<Void> syncProductSpecifications(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_SPECIFICATION);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
-        CatalogType.PRODUCT_SPECIFICATION, catalogs);
+        CatalogType.PRODUCT_SPECIFICATION, CatalogUtil.getCatalogs(CatalogType.PRODUCT_SPECIFICATION));
   }
 
   private Mono<Void> syncProductOfferings(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_OFFERING);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
-        CatalogType.PRODUCT_OFFERING, catalogs);
+        CatalogType.PRODUCT_OFFERING, CatalogUtil.getCatalogs(CatalogType.PRODUCT_OFFERING));
   }
 
   private Mono<Void> syncBundles(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_BUNDLES);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
-        CatalogType.PRODUCT_BUNDLES, catalogs);
+        CatalogType.PRODUCT_BUNDLES, CatalogUtil.getCatalogs(CatalogType.PRODUCT_BUNDLES));
   }
 
   private Mono<Void> syncResourceSpecifications(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.RESOURCE_SPECIFICATION);
     return sync(catalogSyncProperties.getResourceCatalogUrl(), context,
-        CatalogType.RESOURCE_SPECIFICATION, catalogs);
+        CatalogType.RESOURCE_SPECIFICATION, CatalogUtil.getCatalogs(CatalogType.RESOURCE_SPECIFICATION));
   }
 
   private Mono<Void> syncServiceSpecifications(OverallContext context) {
-    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.SERVICE_SPECIFICATION);
-    return sync(catalogSyncProperties.getServiceCatalogUrl(), context, CatalogType.SERVICE_SPECIFICATION,
-            catalogs);
+    return sync(catalogSyncProperties.getServiceCatalogUrl(), context,
+        CatalogType.SERVICE_SPECIFICATION, CatalogUtil.getCatalogs(CatalogType.SERVICE_SPECIFICATION));
   }
+
+  // ── Core synchronisation logic ────────────────────────────────────────
 
   private Mono<Void> sync(String baseUrl, OverallContext overall, CatalogType catalogType,
       Resource[] catalogs) {
@@ -186,13 +187,15 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
       Resource catalog) {
     SingleContext ctx = new SingleContext();
     ctx.setCatalogType(catalogType);
-    ctx.setRequestedCatalog(JacksonUtil2.readAsMap(catalog));
+    ctx.setRequestedCatalog(CatalogUtil.readAsMap(catalog));
     ctx.setId(TypeUtil.asString(ctx.getRequestedCatalog().get("id")));
 
-    return catalogClient.get(baseUrl, ctx)
-        .flatMap(body -> patchIfNecessary(baseUrl, overallContext, ctx, body))
+    URI getUri = uri(baseUrl, resolveGetEndpoint(ctx), ctx.getId());
+
+    return catalogClient.get(getUri)
+        .flatMap(body -> handleExistingEntity(baseUrl, overallContext, ctx, body))
         .doOnError(CatalogGetException.class, this::logGetException)
-        .onErrorResume(CatalogGetException.class, createIfNotExists(baseUrl, overallContext, ctx))
+        .onErrorResume(CatalogGetException.class, handleNotFound(baseUrl, overallContext, ctx))
         .doOnError(CatalogPostException.class, e -> log.error("Exception during POST: ", e))
         .doOnError(CatalogPatchException.class, e -> log.error("Exception during PATCH: ", e))
         .then();
@@ -204,41 +207,153 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     }
   }
 
+  // ── Existing entity handling ──────────────────────────────────────────
+
+  private Mono<Void> handleExistingEntity(String baseUrl, OverallContext overall,
+      SingleContext ctx, String body) {
+    if (ctx.getCatalogType().getEntityType() == EntityType.MULTI_VERSIONED) {
+      return handleMultiVersionedExisting(baseUrl, overall, ctx, body);
+    }
+    return patchIfNecessary(baseUrl, overall, ctx, body);
+  }
+
+  /**
+   * MULTI_VERSIONED entities returned by {@code GET /endpoint/id} carry a version field.
+   * <ul>
+   *   <li>{@code version == "0"} → only the design version exists; create the launched version.</li>
+   *   <li>{@code version > "0"} → a launched version exists; patch it if content differs,
+   *       using a versioned URL {@code /endpoint/id:(version=N)}.</li>
+   * </ul>
+   */
+  private Mono<Void> handleMultiVersionedExisting(String baseUrl, OverallContext overall,
+      SingleContext ctx, String body) {
+    Map<String, Object> existingMap = CatalogUtil.readAsMap(body);
+    String existingVersion = TypeUtil.asString(existingMap.get(CatalogConstants.VERSION));
+
+    if ("0".equals(existingVersion)) {
+      log.debug("MULTI_VERSIONED {} id={}: only version 0 exists, creating launched version.",
+          ctx.getCatalogType(), ctx.getId());
+      return createLaunchedVersion(baseUrl, overall, ctx);
+    }
+
+    ctx.setExistingVersion(existingVersion);
+    return patchIfNecessary(baseUrl, overall, ctx, body);
+  }
+
+  private Mono<Void> createLaunchedVersion(String baseUrl, OverallContext overall,
+      SingleContext ctx) {
+    URI postUri = uri(baseUrl, resolvePostPatchEndpoint(ctx));
+    String postBody = CatalogUtil.stripForPost(ctx.getRequestedCatalog());
+    String launchedBody = CatalogUtil.launchedVersion(postBody);
+    return catalogClient.post(postUri, launchedBody)
+        .doOnNext(respBody -> overall.addCreatedCatalog(
+            catalog(ctx.getCatalogType(), CatalogUtil.readAsMap(respBody))))
+        .then();
+  }
+
+  // ── Patch (update) logic ──────────────────────────────────────────────
+
   private Mono<Void> patchIfNecessary(String baseUrl, OverallContext overall,
       SingleContext ctx, String body) {
     if (!ctx.getCatalogType().isPatchable()) {
       log.debug("Skipping patch checks for {}, id = {}", ctx.getCatalogType(), ctx.getId());
       return Mono.empty();
     }
-    ctx.setExistingCatalog(JacksonUtil2.readAsMap(body));
+    ctx.setExistingCatalog(CatalogUtil.readAsMap(body));
     if (CatalogUtil.requestedEqualsExisting(ctx)) {
       log.debug("Skipping patch because {} id = {} is up to date.", ctx.getCatalogType(),
           ctx.getId());
       return Mono.empty();
     }
     log.debug("Will patch {} id = {}", ctx.getCatalogType(), ctx.getId());
-    return catalogClient.patch(baseUrl, ctx)
+
+    String idSegment = ctx.getId();
+    if (ctx.getCatalogType().getEntityType() == EntityType.MULTI_VERSIONED
+        && ctx.getExistingVersion() != null) {
+      idSegment = ctx.getId() + ":(version=" + ctx.getExistingVersion() + ")";
+    }
+    URI patchUri = uri(baseUrl, resolvePostPatchEndpoint(ctx), idSegment);
+    String patchBody = CatalogUtil.stripForPatch(ctx.getRequestedCatalog());
+
+    return catalogClient.patch(patchUri, ctx.getCatalogType().getPatchType(), patchBody)
         .doOnNext(patchedBody -> overall.addUpdatedCatalog(
-            catalog(ctx.getCatalogType(), JacksonUtil2.readAsMap(patchedBody))))
+            catalog(ctx.getCatalogType(), CatalogUtil.readAsMap(patchedBody))))
         .then();
   }
 
-  @NonNull
-  private Function<? super CatalogGetException, ? extends Mono<Void>> createIfNotExists(
-      String baseUrl, OverallContext overall, SingleContext ctx) {
+  // ── Create (POST) logic ───────────────────────────────────────────────
+
+  private java.util.function.Function<? super CatalogGetException, ? extends Mono<Void>>
+      handleNotFound(String baseUrl, OverallContext overall, SingleContext ctx) {
     return e -> {
-      if (e.getHttpStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)) {
-        log.debug("Will create {} id = {}", ctx.getCatalogType(), ctx.getId());
-        return catalogClient.post(baseUrl, ctx)
-            .doOnNext(body -> overall.addCreatedCatalog(
-                catalog(ctx.getCatalogType(), JacksonUtil2.readAsMap(body))))
-            .then();
-      } else {
+      if (!e.getHttpStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)) {
         log.error("Unexpected status code {} received. Stopping.", e.getHttpStatusCode());
         return Mono.error(e);
       }
+      log.debug("Will create {} id = {}", ctx.getCatalogType(), ctx.getId());
+      URI postUri = uri(baseUrl, resolvePostPatchEndpoint(ctx));
+      return switch (ctx.getCatalogType().getEntityType()) {
+        case MULTI_VERSIONED -> createMultiVersioned(postUri, overall, ctx);
+        case SINGLE_VERSIONED -> createSingleVersioned(postUri, overall, ctx);
+        case NORMAL -> createNormal(postUri, overall, ctx);
+      };
     };
   }
+
+  private Mono<Void> createMultiVersioned(URI postUri, OverallContext overall, SingleContext ctx) {
+    String postBody = CatalogUtil.stripForPost(ctx.getRequestedCatalog());
+    String v0Body = CatalogUtil.version0(postBody);
+    String v1Body = CatalogUtil.launchedVersion(postBody);
+    return catalogClient.post(postUri, v0Body)
+        .then(catalogClient.post(postUri, v1Body))
+        .doOnNext(respBody -> overall.addCreatedCatalog(
+            catalog(ctx.getCatalogType(), CatalogUtil.readAsMap(respBody))))
+        .then();
+  }
+
+  private Mono<Void> createSingleVersioned(URI postUri, OverallContext overall, SingleContext ctx) {
+    String postBody = CatalogUtil.stripForPost(ctx.getRequestedCatalog());
+    String v1Body = CatalogUtil.launchedVersion(postBody);
+    return catalogClient.post(postUri, v1Body)
+        .doOnNext(respBody -> overall.addCreatedCatalog(
+            catalog(ctx.getCatalogType(), CatalogUtil.readAsMap(respBody))))
+        .then();
+  }
+
+  private Mono<Void> createNormal(URI postUri, OverallContext overall, SingleContext ctx) {
+    String postBody = CatalogUtil.stripForPost(ctx.getRequestedCatalog());
+    return catalogClient.post(postUri, postBody)
+        .doOnNext(respBody -> overall.addCreatedCatalog(
+            catalog(ctx.getCatalogType(), CatalogUtil.readAsMap(respBody))))
+        .then();
+  }
+
+  // ── Endpoint resolution helpers ───────────────────────────────────────
+
+  private String resolveGetEndpoint(SingleContext ctx) {
+    CatalogType type = ctx.getCatalogType();
+    if (type != CatalogType.RESOURCE_SPECIFICATION) {
+      return type.getGetEndpoint();
+    }
+    Map<String, Object> json = loadJson(type, ctx.getId());
+    return EndpointResolver.getGetEndpoint(type, json);
+  }
+
+  private String resolvePostPatchEndpoint(SingleContext ctx) {
+    CatalogType type = ctx.getCatalogType();
+    if (type != CatalogType.RESOURCE_SPECIFICATION) {
+      return type.getPostPatchEndpoint();
+    }
+    Map<String, Object> json = loadJson(type, ctx.getId());
+    return EndpointResolver.getPostPatchEndpoint(type, json);
+  }
+
+  private Map<String, Object> loadJson(CatalogType catalogType, String id) {
+    var path = "catalog/" + catalogType.getLocationPattern() + "/" + id + ".json";
+    return JacksonUtil.jsonToMap(JacksonUtil.contents(path));
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────────
 
   private Catalog catalog(CatalogType type, Map<String, Object> map) {
     return new Catalog(type,

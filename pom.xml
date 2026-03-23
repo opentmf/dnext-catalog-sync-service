@@ -4,11 +4,11 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.11</version>
+    <version>4.0.4</version>
   </parent>
   <groupId>org.opentmf.dnext</groupId>
   <artifactId>dnext-catalog-sync-service</artifactId>
-  <version>1.1.2-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
 
   <name>dnext-catalog-sync-service</name>
 
@@ -57,14 +57,13 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
-    <opentmf-db-lock-service.version>1.0.9</opentmf-db-lock-service.version>
-    <opentmf-commons.version>1.0.5</opentmf-commons.version>
-    <opentmf-openid-webclient-provider.version>1.1.1</opentmf-openid-webclient-provider.version>
-    <opentmf-basic-webclient-provider.version>1.1.1</opentmf-basic-webclient-provider.version>
+    <opentmf-db-lock-service.version>2.0.0</opentmf-db-lock-service.version>
+    <opentmf-commons.version>2.1.0</opentmf-commons.version>
+    <opentmf-http-clients.version>2.0.0-SNAPSHOT</opentmf-http-clients.version>
+    <opentmf-mockserver.version>2.1.1-SNAPSHOT</opentmf-mockserver.version>
 
     <archunit.version>1.4.1</archunit.version>
     <testcontainers.version>1.21.4</testcontainers.version>
-    <mockserver.version>5.15.0</mockserver.version>
     <jsonassert.version>1.5.3</jsonassert.version>
 
     <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
@@ -94,17 +93,27 @@
       <version>${jsonassert.version}</version>
     </dependency>
 
-    <!-- Optional dependencies -->
+    <!-- Optional HTTP client dependencies -->
     <dependency>
       <groupId>org.opentmf.client</groupId>
-      <artifactId>opentmf-openid-webclient-provider</artifactId>
-      <version>${opentmf-openid-webclient-provider.version}</version>
+      <artifactId>opentmf-http-clients-common</artifactId>
+      <version>${opentmf-http-clients.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opentmf.client</groupId>
+      <artifactId>opentmf-http-clients-reactive</artifactId>
+      <version>${opentmf-http-clients.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.opentmf.client</groupId>
-      <artifactId>opentmf-basic-webclient-provider</artifactId>
-      <version>${opentmf-basic-webclient-provider.version}</version>
+      <artifactId>opentmf-http-clients-rest</artifactId>
+      <version>${opentmf-http-clients.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webflux</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -148,16 +157,22 @@
       <version>${archunit.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.mock-server</groupId>
-      <artifactId>mockserver-netty</artifactId>
-      <version>${mockserver.version}</version>
+      <groupId>org.opentmf.mockserver</groupId>
+      <artifactId>opentmf-mockserver</artifactId>
+      <version>${opentmf-mockserver.version}</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.opentmf.client</groupId>
+      <artifactId>opentmf-http-clients-starter-reactive</artifactId>
+      <version>${opentmf-http-clients.version}</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webclient</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
