@@ -10,7 +10,7 @@ import org.opentmf.catalog.sync.exception.CatalogSyncException;
 import org.opentmf.client.common.exception.OpenTmfClientResponseException;
 import org.opentmf.client.common.model.ClientProperties;
 import org.opentmf.client.rest.service.api.SyncTokenService;
-import org.opentmf.client.rest.util.RestTemplateUtil;
+import org.opentmf.client.rest.util.SyncClientUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
@@ -55,7 +55,7 @@ public class CatalogRestClientImpl implements CatalogRestClient {
   private String execute(java.util.function.Supplier<String> action,
       Class<? extends CatalogSyncException> errorClass) {
     try {
-      return RestTemplateUtil.executeWithRetry(action,
+      return SyncClientUtil.executeWithRetry(action,
           clientProperties.getNumRetries(),
           clientProperties.getRetryWaitDuration());
     } catch (OpenTmfClientResponseException e) {
