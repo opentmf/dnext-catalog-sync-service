@@ -1,6 +1,6 @@
 package org.opentmf.catalog.sync.model;
 
-import java.util.SortedMap;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +10,7 @@ public class SingleContext {
 
   private CatalogType catalogType;
   private String id;
-  private SortedMap<String, Object> requestedCatalog;
-  private SortedMap<String, Object> existingCatalog;
+  private Map<String, Object> requestedCatalog;
+  private Map<String, Object> existingCatalog;
+  private String existingVersion;
 }

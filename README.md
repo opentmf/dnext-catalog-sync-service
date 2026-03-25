@@ -2,35 +2,41 @@
 This service synchronizes the catalog definitions under classpath:catalog folder to the [DNext](https://www.dnext-technology.com/) catalog microservices.
 
 ## Execution Logic of the Service
+
+Each catalog type has an **entity type** that determines versioning behaviour:
+
+| Entity Type        | Description                                                                                   |
+|--------------------|-----------------------------------------------------------------------------------------------|
+| `MULTI_VERSIONED`  | Two versions must exist: version "0" (In design) and version N≥1 (Launched).                  |
+| `SINGLE_VERSIONED` | A single version "1" (Launched) exists; there is no version "0".                              |
+| `NORMAL`           | No version field at all; the entity is created and patched as-is.                             |
+
 For each Catalog Object under classpath:catalog/ folder:
-- Retrieve the corresponding catalog object from the product, service, or the resource catalog.
-- IF not found (404):
-    - strip the following fields from the Catalog object:
-        - href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
-    - IF versioned Entity
-        - create the catalog version="0", lifecycleStatus = "In design", validFor with endDateTime by sending a POST request
-        - create the catalog version="1", lifecycleStatus = "Launched", validFor without an endDate by sending a POST request
-    - ELSE IF soft versioned entity
-        - create the catalog version="1", lifecycleStatus = "Launched", validFor without an endDate by sending a POST request
-    - ELSE
-        - create the catalog by sending a POST request
-    - END
-    - IF success
-        - then continue with the next catalog object
-    - ELSE,
-        - FAIL: stop, do not continue
-- ELSE IF Catalog object is patchable (only category is not patchable)
-    - Strip the following fields from both requested and existing objects:
-        - id, version, @baseType, @type, href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
-    - compare the stripped json documents to check whether they are the same or not using the JSONCompareMode.NON_EXTENSIBLE mode, which means "not extensible, and non-strict array ordering".
-    - IF they are the same
-        - Then Success, just continue checking the next catalog object
-    - ELSE
-        - Patch the catalog object
-        - IF Patch is successful
-            - then continue with the next catalog object
-        - ELSE
-            - <span color:"Red">FAIL</span>, do not start the application.
+
+1. **GET** the corresponding catalog object from the product, service, or the resource catalog.
+
+2. **IF not found (404):**
+    - Strip the following fields from the payload: href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
+    - **IF `MULTI_VERSIONED`:**
+        - POST version "0": lifecycleStatus = "In design", validFor with endDateTime (today)
+        - POST version "1": lifecycleStatus = "Launched", validFor with startDateTime (now) and no endDateTime
+    - **ELSE IF `SINGLE_VERSIONED`:**
+        - POST version "1": lifecycleStatus = "Launched", validFor with startDateTime (now) and no endDateTime
+    - **ELSE (`NORMAL`):**
+        - POST the catalog as-is (stripped)
+    - On failure, **FAIL**: stop, do not start the application.
+
+3. **ELSE IF entity exists:**
+    - **IF `MULTI_VERSIONED`:**
+        - The GET (without a version qualifier) returns the **latest** version.
+        - IF the returned payload has `"version": "0"` → only the design version exists; create the launched version (version "1") via POST.
+        - IF the returned version is > 0 → the launched version already exists; proceed to the patch step, using the versioned URL pattern `/{endpoint}/{id}:(version=N)` for the PATCH request.
+    - **IF the catalog type is patchable** (all types except category):
+        - Strip the following fields from **both** the requested and existing payloads: id, version, @baseType, @type, href, revision, validFor, aclRelatedParty, lastUpdate, createdDate, updatedDate, createdBy, updatedBy, @schemaLocation
+        - Compare the stripped documents using `JSONCompareMode.NON_EXTENSIBLE` (not extensible, non-strict array ordering).
+        - IF they are the same → skip, continue to the next catalog object.
+        - ELSE → PATCH the catalog object. On failure, **FAIL**: stop, do not start the application.
+    - **ELSE** (not patchable) → skip.
 
 ## Using the Service
 To use this service from a microservice, the following six small steps are necessary:
@@ -98,7 +104,7 @@ opentmf:
   catalog-sync:
     enabled: true
     catalog-version: 1.0.0
-    client: default
+    client-ref: default
     product-catalog-url: http://dpc-api-svc/tmf-api/productCatalogManagement/v4
     resource-catalog-url: http://drc-api-svc/tmf-api/resourceCatalog/v4
     service-catalog-url: http://drc-api-svc/tmf-api/serviceCatalogManagement/v4
