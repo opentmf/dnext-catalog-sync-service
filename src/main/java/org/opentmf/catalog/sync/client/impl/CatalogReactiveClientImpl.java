@@ -1,9 +1,8 @@
 package org.opentmf.catalog.sync.client.impl;
 
 import java.net.URI;
-import java.time.Duration;
 import lombok.RequiredArgsConstructor;
-import org.opentmf.catalog.sync.client.api.CatalogClient;
+import org.opentmf.catalog.sync.client.api.CatalogReactiveClient;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
 import org.opentmf.catalog.sync.exception.CatalogPatchException;
 import org.opentmf.catalog.sync.exception.CatalogPostException;
@@ -19,12 +18,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 /**
- * Reactive {@link CatalogClient} implementation backed by {@link WebClient}.
+ * Reactive {@link CatalogReactiveClient} implementation backed by {@link WebClient}.
  *
  * @author Gokhan Demir
  */
 @RequiredArgsConstructor
-public class ReactiveCatalogClientImpl implements CatalogClient {
+public class CatalogReactiveClientImpl implements CatalogReactiveClient {
 
   private final WebClient webClient;
   private final TokenService tokenService;
@@ -70,7 +69,7 @@ public class ReactiveCatalogClientImpl implements CatalogClient {
   private reactor.util.retry.RetryBackoffSpec retry() {
     return WebClientUtil.retry(
         clientProperties.getNumRetries(),
-        Duration.ofMillis(clientProperties.getRetryWaitMillis()));
+        clientProperties.getRetryWaitDuration());
   }
 
   private static Mono<CatalogSyncException> handleError(

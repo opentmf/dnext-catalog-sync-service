@@ -5,13 +5,11 @@ import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
 
 /**
- * Abstraction over the HTTP transport layer. Both reactive (WebClient) and synchronous
- * (RestTemplate) implementations wrap their results in {@link Mono} so that the service
- * layer can use a single reactive pipeline.
+ * Reactive HTTP transport abstraction backed by {@link org.springframework.web.reactive.function.client.WebClient}.
  *
  * @author Gokhan Demir
  */
-public interface CatalogClient {
+public interface CatalogReactiveClient {
 
   Mono<String> get(URI uri);
 

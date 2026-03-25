@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.opentmf.catalog.sync.client.api.CatalogClient;
+import org.opentmf.catalog.sync.client.api.CatalogReactiveClient;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
 import org.opentmf.catalog.sync.exception.CatalogPatchException;
@@ -40,7 +40,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @RequiredArgsConstructor
-public class CatalogSyncServiceImpl implements CatalogSyncService {
+public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
 
   private static final String PRODUCT = "product";
   public static final String RESOURCE = "resource";
@@ -48,7 +48,7 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
 
   private final CatalogSyncProperties catalogSyncProperties;
   private final DbLockService dbLockService;
-  private final CatalogClient catalogClient;
+  private final CatalogReactiveClient catalogClient;
 
   @Override
   public void ensureCatalogConsistency() {

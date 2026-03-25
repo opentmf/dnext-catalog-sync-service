@@ -4,28 +4,37 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [2.0.0-SNAPSHOT]
+## [2.0.0] - 2026-03-25
 
 ### Added
-- Dual HTTP client support: both reactive (WebClient) and synchronous (RestTemplate) transports via `opentmf-http-clients`.
+- Dual HTTP client support: both reactive (WebClient) and synchronous (RestClient) transports via `opentmf-http-clients`.
+- `CatalogReactiveClient` and `CatalogRestClient` interfaces replacing the single `CatalogClient`.
+- `CatalogRestClientImpl` for synchronous RestClient-based catalog communication.
+- `ReactiveCatalogSyncServiceImpl` and `RestCatalogSyncServiceImpl` as separate service implementations.
 - MULTI_VERSIONED entity handling: version 0 detection triggers creation of launched version; PATCH requests use versioned URL pattern (`/endpoint/id:(version=N)`).
-- `RestCatalogClientImpl` for synchronous RestTemplate-based catalog synchronisation.
 - `CatalogUtil.equals()` for JSON comparison (moved from deleted `JacksonUtil2`).
 - `CatalogUtil.launchedVersion()` (renamed from `version1()`).
+- `CatalogSyncRestIT` integration test for the REST client path.
+- `CatalogSyncService` exposed as a `@Bean` for testability.
 
 ### Changed
 - **BREAKING**: Upgraded to Spring Boot 4.0.4 and Jackson 3.x (`tools.jackson` packages).
 - **BREAKING**: Configuration property `opentmf.catalog-sync.client` renamed to `opentmf.catalog-sync.client-ref`.
 - **BREAKING**: Replaced `opentmf-openid-webclient-provider` and `opentmf-basic-webclient-provider` with `opentmf-http-clients`.
+- **BREAKING**: Removed `spring-boot-starter-parent`; Spring Boot is now managed via `spring-boot-dependencies` BOM import in `<dependencyManagement>`. All plugin versions are explicitly declared.
 - Upgraded `opentmf-commons` to 2.1.0, `opentmf-db-lock-service` to 2.0.0.
-- Replaced `mockserver-netty` test dependency with `opentmf-mockserver` 2.1.1-SNAPSHOT.
-- `CatalogClient` interface simplified to `get(URI)`, `post(URI, body)`, `patch(URI, mediaType, body)`.
-- `CatalogClientImpl` renamed to `ReactiveCatalogClientImpl`.
+- Replaced `mockserver-netty` test dependency with `opentmf-mockserver` 2.1.1.
+- `CatalogRestClientImpl` now uses Spring's `RestClient` (fluent API) instead of the deprecated `RestTemplate`; auto-configuration looks up `<client-ref>RestClient` bean.
+- `CatalogClient` interface split into `CatalogReactiveClient` (Mono-returning) and `CatalogRestClient` (String-returning).
+- `CatalogClientImpl` renamed to `CatalogReactiveClientImpl`.
+- `CatalogSyncServiceImpl` split into `ReactiveCatalogSyncServiceImpl` (reactive pipeline) and `RestCatalogSyncServiceImpl` (imperative).
 - `SingleContext` fields relaxed from `SortedMap` to `Map`; added `existingVersion` field.
 - `CatalogUtil.stripForPost()` and `stripForPatch()` are now non-mutating (create copies).
-- Auto-configuration dynamically detects reactive vs REST client from `client-ref` bean prefix.
+- Auto-configuration uses `SmartInitializingSingleton` and dynamically detects reactive vs REST client from `client-ref` bean prefix.
+- `CatalogSyncServiceIT` renamed to `CatalogSyncReactiveIT`.
 
 ### Removed
+- `CatalogClient` unified interface (replaced by `CatalogReactiveClient` and `CatalogRestClient`).
 - `JacksonUtil2` (replaced by `JacksonUtil` from `opentmf-commons` and `CatalogUtil`).
 - `OpenidAuthClientsConfig` test configuration.
 - Direct dependency on `mockserver-netty`.

@@ -24,7 +24,7 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.matchers.MatchType;
 import org.mockserver.model.JsonBody;
 import org.mockserver.model.MediaType;
-import org.opentmf.catalog.sync.client.impl.ReactiveCatalogClientImpl;
+import org.opentmf.catalog.sync.client.impl.CatalogReactiveClientImpl;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
 import org.opentmf.catalog.sync.exception.CatalogPatchException;
@@ -33,7 +33,7 @@ import org.opentmf.catalog.sync.model.CatalogConstants;
 import org.opentmf.catalog.sync.model.CatalogType;
 import org.opentmf.catalog.sync.model.EntityType;
 import org.opentmf.catalog.sync.service.api.CatalogSyncService;
-import org.opentmf.catalog.sync.service.impl.CatalogSyncServiceImpl;
+import org.opentmf.catalog.sync.service.impl.ReactiveCatalogSyncServiceImpl;
 import org.opentmf.catalog.sync.util.CatalogUtil;
 import org.opentmf.catalog.sync.util.ResourceUtil;
 import org.opentmf.catalog.sync.util.WebUtil;
@@ -57,7 +57,7 @@ import tools.jackson.databind.node.ObjectNode;
 @EnableConfigurationProperties(CatalogSyncProperties.class)
 @TestInstance(Lifecycle.PER_CLASS)
 @Slf4j
-class CatalogSyncServiceIT {
+class CatalogSyncReactiveIT {
 
   private static final ClientAndServer MOCK_SERVER = new ClientAndServer();
   private static final String BASE_URL = "http://localhost:" + MOCK_SERVER.getLocalPort();
@@ -74,10 +74,10 @@ class CatalogSyncServiceIT {
     var tokenService = new org.opentmf.client.reactive.service.impl.NoOpTokenService();
     var clientProperties = new ClientProperties();
     clientProperties.setNumRetries(3);
-    clientProperties.setRetryWaitMillis(100);
-    var catalogClient = new ReactiveCatalogClientImpl(webClient, tokenService, clientProperties);
+    clientProperties.setRetryWaitDuration(java.time.Duration.ofMillis(100));
+    var catalogClient = new CatalogReactiveClientImpl(webClient, tokenService, clientProperties);
     catalogSyncService =
-        new CatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
+        new ReactiveCatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
     catalogSyncProperties.setProductCatalogUrl(BASE_URL);
     catalogSyncProperties.setResourceCatalogUrl(BASE_URL);
     catalogSyncProperties.setServiceCatalogUrl(BASE_URL);
