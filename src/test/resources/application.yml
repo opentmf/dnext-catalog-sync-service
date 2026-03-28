@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:tc:postgresql:16.4-alpine:///db
+    url: jdbc:tc:postgresql:18.3-alpine:///db
     hikari:
       schema: public
 

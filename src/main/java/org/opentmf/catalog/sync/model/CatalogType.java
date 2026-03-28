@@ -21,6 +21,9 @@ public enum CatalogType {
   PRODUCT_SPECIFICATION("productSpecification", "productSpecification", true,
       MULTI_VERSIONED, MERGE_PATCH, "product/specifications"),
 
+  PRODUCT_OFFERING_PRICE("productOfferingPrice", "productOfferingPrice", true,
+      MULTI_VERSIONED, MERGE_PATCH, "product/prices"),
+
   PRODUCT_OFFERING("productOffering", "productOffering", true,
       MULTI_VERSIONED, MERGE_PATCH, "product/offerings"),
 

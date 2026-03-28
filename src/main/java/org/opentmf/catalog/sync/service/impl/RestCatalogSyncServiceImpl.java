@@ -111,6 +111,7 @@ public class RestCatalogSyncServiceImpl implements CatalogSyncService {
     syncServiceSpecifications(context);
     syncProductCategories(context);
     syncProductSpecifications(context);
+    syncProductOfferingPrices(context);
     syncProductOfferings(context);
     syncBundles(context);
     logDeploymentDetails(context);
@@ -150,6 +151,11 @@ public class RestCatalogSyncServiceImpl implements CatalogSyncService {
   private void syncProductSpecifications(OverallContext context) {
     sync(catalogSyncProperties.getProductCatalogUrl(), context,
         CatalogType.PRODUCT_SPECIFICATION, CatalogUtil.getCatalogs(CatalogType.PRODUCT_SPECIFICATION));
+  }
+
+  private void syncProductOfferingPrices(OverallContext context) {
+    sync(catalogSyncProperties.getProductCatalogUrl(), context,
+        CatalogType.PRODUCT_OFFERING_PRICE, CatalogUtil.getCatalogs(CatalogType.PRODUCT_OFFERING_PRICE));
   }
 
   private void syncProductOfferings(OverallContext context) {

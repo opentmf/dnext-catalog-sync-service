@@ -69,13 +69,14 @@ Then, depend on the DNext Catalog Sync service:
 ### 2. Reorganize the Catalog files
 In your microservice, the Catalog files must be under **classpath:catalog** folder with .json extension and the body of the catalog objects should be what product or resource catalog returns as a GET request.
 
-Inside the catalog folder, the following sub folder structure should exist:
+Inside the catalog folder, the following subfolder structure should exist:
 ```text
 catalog
   product
     bundles
     categories
     offerings
+    prices
     specifications
   resource
     specifications
@@ -90,8 +91,9 @@ The following table is ordered by the synchronization and contains the descripti
 |   2   | service/specifications  | the service specifications                  |
 |   3   | product/categories      | the category definitions                    |
 |   4   | product/specifications  | the product specifications                  |
-|   5   | product/offerings       | the non-bundle product offering definitions |
-|   6   | product/bundles         | the bundle product offering definitions     |
+|   5   | product/prices          | the product offering prices                 |
+|   6   | product/offerings       | the non-bundle product offering definitions |
+|   7   | product/bundles         | the bundle product offering definitions     |
 
 **Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 
@@ -123,7 +125,7 @@ spring:
         enabled: false
 ```
 ### 5. Skip Catalog Sync in IT Tests
-In order to skip the Catalog Sync in the IT tests, disable the Catalog Sync Service in your application-it.yml file:
+To skip the Catalog Sync in the IT tests, disable the Catalog Sync Service in your application-it.yml file:
 ```yaml
 opentmf:
   db-lock:
