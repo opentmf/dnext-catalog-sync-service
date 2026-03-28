@@ -1,6 +1,11 @@
 package org.opentmf.catalog.sync.service.impl;
 
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.opentmf.catalog.sync.client.api.CatalogClient;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
 import org.opentmf.catalog.sync.exception.CatalogGetException;
@@ -19,11 +24,6 @@ import org.opentmf.db.lock.exception.DbLockException;
 import org.opentmf.db.lock.model.AcquiredLock;
 import org.opentmf.db.lock.model.LockType;
 import org.opentmf.db.lock.service.api.DbLockService;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -109,6 +109,7 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
         .then(Mono.defer(() -> syncServiceSpecifications(context)))
         .then(Mono.defer(() -> syncProductCategories(context)))
         .then(Mono.defer(() -> syncProductSpecifications(context)))
+        .then(Mono.defer(() -> syncProductPrices(context)))
         .then(Mono.defer(() -> syncProductOfferings(context)))
         .then(Mono.defer(() -> syncBundles(context)))
         .block();
@@ -149,6 +150,12 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_SPECIFICATION);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
         CatalogType.PRODUCT_SPECIFICATION, catalogs);
+  }
+
+  private Mono<Void> syncProductPrices(OverallContext context) {
+    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_OFFERING_PRICE);
+    return sync(catalogSyncProperties.getProductCatalogUrl(), context,
+        CatalogType.PRODUCT_OFFERING_PRICE, catalogs);
   }
 
   private Mono<Void> syncProductOfferings(OverallContext context) {

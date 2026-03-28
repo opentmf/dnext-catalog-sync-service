@@ -69,6 +69,7 @@ catalog
   product
     bundles
     categories
+    prices
     offerings
     specifications
   resource
@@ -84,8 +85,9 @@ The following table is ordered by the synchronization and contains the descripti
 |   2   | service/specifications  | the service specifications                  |
 |   3   | product/categories      | the category definitions                    |
 |   4   | product/specifications  | the product specifications                  |
-|   5   | product/offerings       | the non-bundle product offering definitions |
-|   6   | product/bundles         | the bundle product offering definitions     |
+|   5   | product/prices          | the product offering price definitions      |
+|   6   | product/offerings       | the non-bundle product offering definitions |
+|   7   | product/bundles         | the bundle product offering definitions     |
 
 **Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 
@@ -102,7 +104,6 @@ opentmf:
     product-catalog-url: http://dpc-api-svc/tmf-api/productCatalogManagement/v4
     resource-catalog-url: http://drc-api-svc/tmf-api/resourceCatalog/v4
     service-catalog-url: http://drc-api-svc/tmf-api/serviceCatalogManagement/v4
-
 ```
 The Catalog Sync Service remembers the latest synchronized Catalog versions. If the specified catalogVersion is already the latest synchronized version, then no synchronization will take place. Therefore, it is the developers' responsibility to increase the version when any of the Catalog files change, to enforce the Catalog synchronization.
 

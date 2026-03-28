@@ -28,7 +28,14 @@
   "marketSegment": [],
   "place": [],
   "productOfferingTerm": [],
-  "productOfferingPrice": [],
+  "productOfferingPrice": [
+    {
+      "id": "price_1",
+      "href": "/productOfferingPrice/price_1",
+      "name": "price_1",
+      "version": "1"
+    }
+  ],
   "attachment": [],
   "prodSpecCharValueUse": [
     {

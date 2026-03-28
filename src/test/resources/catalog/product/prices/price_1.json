@@ -1,0 +1,43 @@
+{
+  "id": "price_1",
+  "tax": [
+    {
+      "taxRate": 20,
+      "taxCategory": "VAT"
+    }
+  ],
+  "href": "/tmf-api/productCatalog/v4/productOfferingPrice/price_1:(version=0)",
+  "name": "price_1",
+  "@type": "ProductOfferingPrice",
+  "price": {
+    "unit": "USD",
+    "value": 20
+  },
+  "version": "1",
+  "isBundle": false,
+  "revision": 1,
+  "@baseType": "ProductOfferingPrice",
+  "createdBy": "gokhan",
+  "priceType": "One time charge",
+  "updatedBy": "gokhan",
+  "percentage": 0,
+  "createdDate": "2026-03-28T16:19:02.450Z",
+  "description": "price_1",
+  "updatedDate": "2026-03-28T16:19:02.450Z",
+  "unitOfMeasure": {
+    "units": "Month",
+    "amount": 1
+  },
+  "@schemaLocation": "/tmf-api/productCatalog/v4/schema/productofferingprice.json",
+  "aclRelatedParty": [
+    {
+      "id": "gokhan",
+      "name": "gokhan",
+      "role": "owner",
+      "@type": "RelatedParty",
+      "@referredType": "IAMUser"
+    }
+  ],
+  "lifecycleStatus": "In study",
+  "pricingCategory": "Charge"
+}
