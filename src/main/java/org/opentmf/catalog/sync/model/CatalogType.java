@@ -18,6 +18,9 @@ public enum CatalogType {
   PRODUCT_CATEGORY("category", "category", false,
       SINGLE_VERSIONED, MERGE_PATCH, "product/categories"),
 
+  PRODUCT_CATALOG("catalog", "catalog", true,
+      SINGLE_VERSIONED, MERGE_PATCH, "product/catalogs"),
+
   PRODUCT_SPECIFICATION("productSpecification", "productSpecification", true,
       MULTI_VERSIONED, MERGE_PATCH, "product/specifications"),
 

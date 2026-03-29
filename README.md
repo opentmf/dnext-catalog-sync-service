@@ -74,6 +74,7 @@ Inside the catalog folder, the following subfolder structure should exist:
 catalog
   product
     bundles
+    catalogs
     categories
     offerings
     prices
@@ -90,10 +91,11 @@ The following table is ordered by the synchronization and contains the descripti
 |   1   | resource/specifications | the resource specifications                 |
 |   2   | service/specifications  | the service specifications                  |
 |   3   | product/categories      | the category definitions                    |
-|   4   | product/specifications  | the product specifications                  |
-|   5   | product/prices          | the product offering prices                 |
-|   6   | product/offerings       | the non-bundle product offering definitions |
-|   7   | product/bundles         | the bundle product offering definitions     |
+|   4   | product/catalogs        | the catalog definitions                     |
+|   5   | product/specifications  | the product specifications                  |
+|   6   | product/prices          | the product offering prices                 |
+|   7   | product/offerings       | the non-bundle product offering definitions |
+|   8   | product/bundles         | the bundle product offering definitions     |
 
 **Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 

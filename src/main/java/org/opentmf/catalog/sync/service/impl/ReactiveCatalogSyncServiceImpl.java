@@ -111,6 +111,7 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
     syncResourceSpecifications(context)
         .then(Mono.defer(() -> syncServiceSpecifications(context)))
         .then(Mono.defer(() -> syncProductCategories(context)))
+        .then(Mono.defer(() -> syncProductCatalogs(context)))
         .then(Mono.defer(() -> syncProductSpecifications(context)))
         .then(Mono.defer(() -> syncProductOfferingPrices(context)))
         .then(Mono.defer(() -> syncProductOfferings(context)))
@@ -148,6 +149,11 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
   private Mono<Void> syncProductCategories(OverallContext context) {
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
         CatalogType.PRODUCT_CATEGORY, CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATEGORY));
+  }
+
+  private Mono<Void> syncProductCatalogs(OverallContext context) {
+    return sync(catalogSyncProperties.getProductCatalogUrl(), context,
+        CatalogType.PRODUCT_CATALOG, CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATALOG));
   }
 
   private Mono<Void> syncProductSpecifications(OverallContext context) {
