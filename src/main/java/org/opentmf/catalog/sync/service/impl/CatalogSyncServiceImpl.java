@@ -108,6 +108,7 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     syncResourceSpecifications(context)
         .then(Mono.defer(() -> syncServiceSpecifications(context)))
         .then(Mono.defer(() -> syncProductCategories(context)))
+        .then(Mono.defer(() -> syncProductCatalogs(context)))
         .then(Mono.defer(() -> syncProductSpecifications(context)))
         .then(Mono.defer(() -> syncProductPrices(context)))
         .then(Mono.defer(() -> syncProductOfferings(context)))
@@ -144,6 +145,12 @@ public class CatalogSyncServiceImpl implements CatalogSyncService {
     Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATEGORY);
     return sync(catalogSyncProperties.getProductCatalogUrl(), context,
         CatalogType.PRODUCT_CATEGORY, catalogs);
+  }
+
+  private Mono<Void> syncProductCatalogs(OverallContext context) {
+    Resource[] catalogs = CatalogUtil.getCatalogs(CatalogType.PRODUCT_CATALOG);
+    return sync(catalogSyncProperties.getProductCatalogUrl(), context,
+        CatalogType.PRODUCT_CATALOG, catalogs);
   }
 
   private Mono<Void> syncProductSpecifications(OverallContext context) {

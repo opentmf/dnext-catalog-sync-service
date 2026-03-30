@@ -68,6 +68,7 @@ Inside the catalog folder, the following sub folder structure should exist:
 catalog
   product
     bundles
+    catalogs
     categories
     prices
     offerings
@@ -84,14 +85,15 @@ The following table is ordered by the synchronization and contains the descripti
 |   1   | resource/specifications | the resource specifications                 |
 |   2   | service/specifications  | the service specifications                  |
 |   3   | product/categories      | the category definitions                    |
-|   4   | product/specifications  | the product specifications                  |
-|   5   | product/prices          | the product offering price definitions      |
-|   6   | product/offerings       | the non-bundle product offering definitions |
-|   7   | product/bundles         | the bundle product offering definitions     |
+|   4   | product/catalogs        | the category definitions                    |
+|   5   | product/specifications  | the product specifications                  |
+|   6   | product/prices          | the product offering price definitions      |
+|   7   | product/offerings       | the non-bundle product offering definitions |
+|   8   | product/bundles         | the bundle product offering definitions     |
 
 **Resource specifications:** GET and POST/PATCH endpoints are resolved from each specification's `@type`: `PhysicalResourceSpecification` → `physicalResourceSpecification`, `LogicalResourceSpecification` → `logicalResourceSpecification`. If `@type` is missing or not one of these, both endpoints fall back to `resourceSpecification`.
 
-**Note:** _Inner sub folders within the base sub folders are supported._
+**Note:** _Inner subfolders within the base subfolders are supported._
 
 ### 3. Specify the Catalog Sync Properties
 In your application.yaml, specify the Catalog Sync Properties:
@@ -108,7 +110,7 @@ opentmf:
 The Catalog Sync Service remembers the latest synchronized Catalog versions. If the specified catalogVersion is already the latest synchronized version, then no synchronization will take place. Therefore, it is the developers' responsibility to increase the version when any of the Catalog files change, to enforce the Catalog synchronization.
 
 ### 4. Disable JDBC Repositories
-JDBC template is used only to obtain the DB connections by the db lock service and the rest is performed by pure JDBC calls by the DB Lock service. However, Spring Boot does not know this beforehand and checks if JDBC repositories can also be used as the repository implementations. In order to let Spring Boot know that we don't want to use JDBC repositories, the following should be added to application.yml file:
+JDBC template is used only to obtain the DB connections by the db lock service and the rest is performed by pure JDBC calls by the DB Lock service. However, Spring Boot does not know this beforehand and checks if JDBC repositories can also be used as the repository implementations. To let Spring Boot know that we don't want to use JDBC repositories, the following should be added to the application.yml file:
 
 ```yaml
 spring:
@@ -118,7 +120,7 @@ spring:
         enabled: false
 ```
 ### 5. Skip Catalog Sync in IT Tests
-In order to skip the Catalog Sync in the IT tests, disable the Catalog Sync Service in your application-it.yml file:
+To skip the Catalog Sync in the IT tests, disable the Catalog Sync Service in your application-it.yml file:
 ```yaml
 opentmf:
   db-lock:

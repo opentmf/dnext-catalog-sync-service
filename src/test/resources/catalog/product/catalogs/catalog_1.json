@@ -1,0 +1,37 @@
+{
+  "id": "catalog_2",
+  "href": "/tmf-api/productCatalog/v4/catalog/catalog_2:(version=1)",
+  "name": "catalog_2",
+  "@type": "Catalog",
+  "version": "1",
+  "category": [
+    {
+      "id": "30",
+      "href": "/tmf-api/productCatalog/v4/category/30:(version=1)",
+      "name": "category_30",
+      "version": "1"
+    }
+  ],
+  "revision": 0,
+  "validFor": {
+    "startDateTime": "2026-03-29T18:17:53Z"
+  },
+  "@baseType": "Catalog",
+  "createdBy": "gokhan",
+  "updatedBy": "gokhan",
+  "createdDate": "2026-03-29T18:15:37.934Z",
+  "description": "catalog_2",
+  "updatedDate": "2026-03-29T18:15:37.934Z",
+  "relatedParty": [],
+  "@schemaLocation": "/tmf-api/productCatalog/v4/schema/catalog.json",
+  "aclRelatedParty": [
+    {
+      "id": "gokhan",
+      "name": "gokhan",
+      "role": "owner",
+      "@type": "RelatedParty",
+      "@referredType": "IAMUser"
+    }
+  ],
+  "lifecycleStatus": "Launched"
+}
