@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.opentmf.catalog.sync.config.CatalogSyncAutoConfiguration;
 import org.opentmf.catalog.sync.config.CatalogSyncProperties;
-import org.opentmf.db.lock.service.api.DbLockService;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 
@@ -20,9 +19,6 @@ class CatalogSyncAutoConfigurationTests {
     Mockito.when(ctx.getBean(Mockito.anyString()))
         .thenThrow(new NoSuchBeanDefinitionException("test"));
     Assertions.assertThrows(NoSuchBeanDefinitionException.class, () ->
-        new CatalogSyncAutoConfiguration(
-            ctx,
-            Mockito.mock(DbLockService.class),
-            Mockito.mock(CatalogSyncProperties.class)));
+        new CatalogSyncAutoConfiguration(ctx, Mockito.mock(CatalogSyncProperties.class)));
   }
 }

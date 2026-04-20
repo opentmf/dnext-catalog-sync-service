@@ -5,6 +5,7 @@ import static org.opentmf.catalog.sync.util.WebUtil.uri;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.opentmf.catalog.sync.client.api.CatalogReactiveClient;
@@ -22,12 +23,10 @@ import org.opentmf.catalog.sync.service.api.CatalogSyncService;
 import org.opentmf.catalog.sync.util.CatalogUtil;
 import org.opentmf.catalog.sync.util.EndpointResolver;
 import org.opentmf.catalog.sync.util.TypeUtil;
-import org.opentmf.commons.util.JacksonUtil;
 import org.opentmf.commons.util.UrlUtil;
-import org.opentmf.db.lock.exception.DbLockException;
-import org.opentmf.db.lock.model.AcquiredLock;
+import org.opentmf.db.lock.annotation.UsingClusterLock;
+import org.opentmf.db.lock.model.LockContext;
 import org.opentmf.db.lock.model.LockType;
-import org.opentmf.db.lock.service.api.DbLockService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
@@ -43,21 +42,23 @@ import reactor.core.publisher.Mono;
 public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
 
   private static final String PRODUCT = "product";
-  public static final String RESOURCE = "resource";
-  public static final String SERVICE = "service";
+  private static final String RESOURCE = "resource";
+  private static final String SERVICE = "service";
 
   private final CatalogSyncProperties catalogSyncProperties;
-  private final DbLockService dbLockService;
   private final CatalogReactiveClient catalogClient;
 
   @Override
-  public void ensureCatalogConsistency() {
-    try {
-      ensureRequiredUrlsProvided();
-      doEnsureCatalogConsistency();
-    } catch (DbLockException e) {
-      throw new IllegalStateException("", e);
-    }
+  @UsingClusterLock(
+      lockType = LockType.CATALOG,
+      requestedVersion = "${opentmf.catalog-sync.catalog-version}",
+      downgradeAllowedAfter = "${opentmf.catalog-sync.downgrade-allowed-after:PT10M}",
+      failureMessage = "Could not synchronize Catalogs")
+  public void ensureCatalogConsistency(LockContext lockContext) {
+    ensureRequiredUrlsProvided();
+    OverallContext context = new OverallContext();
+    doSync(context);
+    lockContext.setSuccess(context.getTouchedCount() > 0);
   }
 
   private void ensureRequiredUrlsProvided() {
@@ -75,36 +76,6 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
     }
     Assert.hasText(baseUrl, module + " catalog URL must be provided.");
     UrlUtil.ensureHttpUrl(baseUrl);
-  }
-
-  private void doEnsureCatalogConsistency() throws DbLockException {
-    OverallContext context = new OverallContext();
-    boolean lockReleased = false;
-    AcquiredLock lock = null;
-    try {
-      String requestedVersion = catalogSyncProperties.getCatalogVersion();
-      lock = dbLockService.acquireLock(LockType.CATALOG, requestedVersion);
-      if (lock.isUpgrade()
-          || (lock.isDowngrade()
-              && lock.isDowngradeAllowed(catalogSyncProperties.getDowngradeAllowedAfter())))
-      {
-        doSync(context);
-        releaseLock(lock, context.getTouchedCount());
-        lockReleased = true;
-      } else {
-        dbLockService.releaseLock(lock, false);
-        lockReleased = true;
-        log.info("Catalog files are already up-to-date for version {}.", lock.getLockVersion());
-      }
-    } catch (Exception e) {
-      dbLockService.releaseLock(lock, false);
-      lockReleased = true;
-      throw new IllegalStateException("Could not synchronize Catalogs because of exception", e);
-    } finally {
-      if (!lockReleased) {
-        releaseLock(lock, context.getTouchedCount());
-      }
-    }
   }
 
   private void doSync(OverallContext context) {
@@ -136,10 +107,10 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
     if (touchedCount > 0 && log.isDebugEnabled()) {
       log.debug("Deployed Catalogs and Their Versions follow:");
       for (Catalog catalog : context.getCreatedCatalogs()) {
-        log.debug(String.format("Created: %s", catalog));
+        log.debug("Created: {}", catalog);
       }
       for (Catalog catalog : context.getUpdatedCatalogs()) {
-        log.debug(String.format("Updated: %s", catalog));
+        log.debug("Updated: {}", catalog);
       }
     }
   }
@@ -191,7 +162,7 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
   private Mono<Void> sync(String baseUrl, OverallContext overall, CatalogType catalogType,
       Resource[] catalogs) {
     return Flux.fromIterable(Arrays.asList(catalogs))
-        .flatMap(catalog -> sync1(baseUrl, overall, catalogType, catalog), 1)
+        .concatMap(catalog -> sync1(baseUrl, overall, catalogType, catalog))
         .then();
   }
 
@@ -295,8 +266,8 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
 
   // ── Create (POST) logic ───────────────────────────────────────────────
 
-  private java.util.function.Function<? super CatalogGetException, ? extends Mono<Void>>
-      handleNotFound(String baseUrl, OverallContext overall, SingleContext ctx) {
+  private Function<? super CatalogGetException, ? extends Mono<Void>> handleNotFound(
+      String baseUrl, OverallContext overall, SingleContext ctx) {
     return e -> {
       if (!e.getHttpStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)) {
         log.error("Unexpected status code {} received. Stopping.", e.getHttpStatusCode());
@@ -347,8 +318,7 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
     if (type != CatalogType.RESOURCE_SPECIFICATION) {
       return type.getGetEndpoint();
     }
-    Map<String, Object> json = loadJson(type, ctx.getId());
-    return EndpointResolver.getGetEndpoint(type, json);
+    return EndpointResolver.getGetEndpoint(type, ctx.getRequestedCatalog());
   }
 
   private String resolvePostPatchEndpoint(SingleContext ctx) {
@@ -356,13 +326,7 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
     if (type != CatalogType.RESOURCE_SPECIFICATION) {
       return type.getPostPatchEndpoint();
     }
-    Map<String, Object> json = loadJson(type, ctx.getId());
-    return EndpointResolver.getPostPatchEndpoint(type, json);
-  }
-
-  private Map<String, Object> loadJson(CatalogType catalogType, String id) {
-    var path = "catalog/" + catalogType.getLocationPattern() + "/" + id + ".json";
-    return JacksonUtil.jsonToMap(JacksonUtil.contents(path));
+    return EndpointResolver.getPostPatchEndpoint(type, ctx.getRequestedCatalog());
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────
@@ -373,13 +337,5 @@ public class ReactiveCatalogSyncServiceImpl implements CatalogSyncService {
         TypeUtil.asString(map.get("name")),
         TypeUtil.asString(map.get("version")),
         TypeUtil.asLong(map.get("revision")));
-  }
-
-  private void releaseLock(AcquiredLock lock, int deployedCount) {
-    try {
-      dbLockService.releaseLock(lock, deployedCount > 0);
-    } catch (DbLockException e) {
-      throw new IllegalStateException("Unexpected error during lock release.", e);
-    }
   }
 }

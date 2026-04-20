@@ -30,7 +30,7 @@ public enum CatalogType {
   PRODUCT_OFFERING("productOffering", "productOffering", true,
       MULTI_VERSIONED, MERGE_PATCH, "product/offerings"),
 
-  PRODUCT_BUNDLES(PRODUCT_OFFERING.getGetEndpoint(), PRODUCT_OFFERING.getPostPatchEndpoint(), true,
+  PRODUCT_BUNDLES("productOffering", "productOffering", true,
       MULTI_VERSIONED, MERGE_PATCH, "product/bundles"),
 
   /** getEndpoint and postPatchEndpoint are fallbacks when @type is missing or unknown; otherwise resolved from @type. */

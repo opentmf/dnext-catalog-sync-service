@@ -39,7 +39,9 @@ import org.opentmf.catalog.sync.util.WebUtil;
 import org.opentmf.client.common.model.ClientProperties;
 import org.opentmf.client.rest.util.OpenTmfRestClientStatusHandler;
 import org.opentmf.commons.util.JacksonUtil;
-import org.opentmf.db.lock.service.api.DbLockService;
+import org.opentmf.db.lock.annotation.impl.UsingClusterLockAnnotationAspect;
+import org.opentmf.db.lock.model.LockContext;
+import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,9 +68,9 @@ class CatalogSyncRestIT {
   private static final ClientAndServer MOCK_SERVER = new ClientAndServer();
   private static final String BASE_URL = "http://localhost:" + MOCK_SERVER.getLocalPort();
 
-  @Autowired private DbLockService dbLockService;
   @Autowired private CatalogSyncProperties catalogSyncProperties;
   @Autowired private JdbcTemplate jdbcTemplate;
+  @Autowired private UsingClusterLockAnnotationAspect usingClusterLockAnnotationAspect;
 
   private CatalogSyncService catalogSyncService;
 
@@ -84,8 +86,10 @@ class CatalogSyncRestIT {
     clientProperties.setRetryWaitDuration(java.time.Duration.ofMillis(100));
     var tokenService = new org.opentmf.client.rest.service.impl.NoOpSyncTokenService();
     var catalogClient = new CatalogRestClientImpl(restClient, tokenService, clientProperties);
-    catalogSyncService =
-        new RestCatalogSyncServiceImpl(catalogSyncProperties, dbLockService, catalogClient);
+    var rawService = new RestCatalogSyncServiceImpl(catalogSyncProperties, catalogClient);
+    var factory = new AspectJProxyFactory(rawService);
+    factory.addAspect(usingClusterLockAnnotationAspect);
+    catalogSyncService = factory.getProxy();
     catalogSyncProperties.setProductCatalogUrl(BASE_URL);
     catalogSyncProperties.setResourceCatalogUrl(BASE_URL);
     catalogSyncProperties.setServiceCatalogUrl(BASE_URL);
@@ -110,26 +114,26 @@ class CatalogSyncRestIT {
     jdbcTemplate.execute(
         "insert into DB_LOCK_LATEST (lock_type, lock_version, hostname, lock_acquired_on) "
             + "values ('C', '1.0.0', 'localhost', current_timestamp)");
-    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency());
+    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
   }
 
   @Test
   void testSync_withNonExistentCatalogs_createsAllCatalogs() {
     setupAllCreateExpectations();
-    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency());
+    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
   }
 
   @Test
   void testSync_withDifferentContentExistingCatalogs_patchesPatchableCatalogs() {
     setupAllPatchExpectations();
-    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency());
+    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
     verifyAllPatchExpectations();
   }
 
   @Test
   void testSync_withSameContentExistingCatalogs_doesNotPatchAnyCatalog() {
     setupAllGetExpectations();
-    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency());
+    Assertions.assertDoesNotThrow(() -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
     verifyAllGetExpectations();
   }
 
@@ -138,9 +142,9 @@ class CatalogSyncRestIT {
     get(".*", HttpStatus.CONFLICT, "{\"error\": \"Test error\"}");
     IllegalStateException e =
         Assertions.assertThrows(
-            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
     Assertions.assertInstanceOf(CatalogGetException.class, e.getCause());
-    Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
+    Assertions.assertEquals("Could not synchronize Catalogs", e.getMessage());
     Assertions.assertTrue(e.getCause().getMessage().contains("Test error"));
   }
 
@@ -150,9 +154,9 @@ class CatalogSyncRestIT {
     post(".*", HttpStatus.BAD_REQUEST);
     IllegalStateException e =
         Assertions.assertThrows(
-            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
     Assertions.assertInstanceOf(CatalogPostException.class, e.getCause());
-    Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
+    Assertions.assertEquals("Could not synchronize Catalogs", e.getMessage());
     Assertions.assertTrue(e.getCause().getMessage().contains("Test Post Error"));
   }
 
@@ -161,9 +165,9 @@ class CatalogSyncRestIT {
     setupAllPatchExpectationsForError();
     IllegalStateException e =
         Assertions.assertThrows(
-            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency());
+            IllegalStateException.class, () -> catalogSyncService.ensureCatalogConsistency(new LockContext()));
     Assertions.assertInstanceOf(CatalogPatchException.class, e.getCause());
-    Assertions.assertEquals("Could not synchronize Catalogs because of exception", e.getMessage());
+    Assertions.assertEquals("Could not synchronize Catalogs", e.getMessage());
     Assertions.assertTrue(e.getCause().getMessage().contains("Test Patch Error"));
   }
 

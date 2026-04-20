@@ -4,6 +4,27 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.4] - 2026-04-17
+
+### Changed
+- **Breaking**: `CatalogSyncService.ensureCatalogConsistency()` now takes a `LockContext` parameter; callers constructing the service directly must pass `new LockContext()`.
+- Lock lifecycle is now managed by `@UsingClusterLock` from `opentmf-db-lock-service` 2.1.0 instead of hand-written acquire/release plumbing inside each impl. The annotation reads `opentmf.catalog-sync.catalog-version` from the environment; `opentmf.catalog-sync.downgrade-allowed-after` is optional (defaults to `PT10M` when unset).
+- Send `Accept: application/json` header on GET, POST, and PATCH requests to dnext backends (both reactive and REST client implementations).
+- Reactive client now honors `TokenService.getTokenType()` and skips the `Authorization` header when the token type or token is empty, matching the REST client behavior.
+- `CatalogSyncProperties.downgradeAllowedAfter` is now a `Duration` (default `10m`) instead of a raw `long` milliseconds value.
+- Bumped `opentmf-db-lock-service` to 2.1.0, `opentmf-http-clients` to 2.1.3, and Spring Boot to 4.0.5.
+
+### Fixed
+- REST client short-circuits `applyAuth` when the token type is empty, avoiding an unnecessary `getToken()` call.
+- `CatalogSyncException` now passes its message to `Throwable(message)` so stack traces include it and subclasses participate in the exception chain normally.
+- Lock-release failures during error handling are attached as suppressed exceptions instead of overwriting the primary cause; guarded against NPE when `acquireLock` itself fails.
+- `CatalogUtil.equals` now catches only `JSONException` (was catch-all) and logs at WARN when comparison fails.
+
+### Removed
+- Dead `validFor.remove("endDateTime")` call in `CatalogUtil.launchedVersion` (operated on a freshly-created node).
+- Duplicate lock acquire/release code in `ReactiveCatalogSyncServiceImpl` and `RestCatalogSyncServiceImpl`; both impls now delegate to `@UsingClusterLock`.
+- `DbLockService` constructor dependency on both service impls; no longer needed at this layer.
+
 ## [2.0.3] - 2026-03-29
 
 ### Added

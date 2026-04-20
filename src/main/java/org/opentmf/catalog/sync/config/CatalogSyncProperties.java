@@ -1,6 +1,7 @@
 package org.opentmf.catalog.sync.config;
 
 import jakarta.validation.constraints.NotEmpty;
+import java.time.Duration;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,9 +30,9 @@ public class CatalogSyncProperties {
   private String catalogVersion;
 
   /**
-   * Minimum time in milliseconds before a downgrade decision is allowed.
+   * Minimum time that must have passed since the last release before a downgrade is allowed.
    */
-  private long downgradeAllowedAfter = 600000L;
+  private Duration downgradeAllowedAfter = Duration.ofMinutes(10);
 
   private String productCatalogUrl;
 
@@ -43,7 +44,7 @@ public class CatalogSyncProperties {
    * Reference to the HTTP client configured under {@code opentmf.http-clients.<client-ref>}.
    * The following beans are resolved by this prefix:
    * <ul>
-   *   <li>{@code <clientRef>WebClient} or {@code <clientRef>RestTemplate}</li>
+   *   <li>{@code <clientRef>WebClient} or {@code <clientRef>RestClient}</li>
    *   <li>{@code <clientRef>TokenService}</li>
    *   <li>{@code <clientRef>ClientProperties}</li>
    * </ul>

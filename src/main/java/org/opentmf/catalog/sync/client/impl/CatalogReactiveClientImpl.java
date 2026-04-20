@@ -10,6 +10,7 @@ import org.opentmf.catalog.sync.exception.CatalogSyncException;
 import org.opentmf.client.common.model.ClientProperties;
 import org.opentmf.client.reactive.service.api.TokenService;
 import org.opentmf.client.reactive.util.WebClientUtil;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -33,7 +34,8 @@ public class CatalogReactiveClientImpl implements CatalogReactiveClient {
   public Mono<String> get(URI uri) {
     return tokenService.getToken()
         .flatMap(token -> webClient.get().uri(uri)
-            .headers(h -> h.setBearerAuth(token))
+            .headers(h -> applyAuth(h, token))
+            .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .onStatus(HttpStatusCode::isError, r -> handleError(r, CatalogGetException.class))
             .bodyToMono(String.class)
@@ -44,8 +46,9 @@ public class CatalogReactiveClientImpl implements CatalogReactiveClient {
   public Mono<String> post(URI uri, String body) {
     return tokenService.getToken()
         .flatMap(token -> webClient.post().uri(uri)
-            .headers(h -> h.setBearerAuth(token))
+            .headers(h -> applyAuth(h, token))
             .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
             .bodyValue(body)
             .retrieve()
             .onStatus(HttpStatusCode::isError, r -> handleError(r, CatalogPostException.class))
@@ -57,13 +60,24 @@ public class CatalogReactiveClientImpl implements CatalogReactiveClient {
   public Mono<String> patch(URI uri, MediaType patchType, String body) {
     return tokenService.getToken()
         .flatMap(token -> webClient.patch().uri(uri)
-            .headers(h -> h.setBearerAuth(token))
+            .headers(h -> applyAuth(h, token))
             .contentType(patchType)
+            .accept(MediaType.APPLICATION_JSON)
             .bodyValue(body)
             .retrieve()
             .onStatus(HttpStatusCode::isError, r -> handleError(r, CatalogPatchException.class))
             .bodyToMono(String.class)
             .retryWhen(retry()));
+  }
+
+  private void applyAuth(HttpHeaders headers, String token) {
+    String tokenType = tokenService.getTokenType();
+    if (tokenType.isEmpty()) {
+      return;
+    }
+    if (!token.isEmpty()) {
+      headers.set(HttpHeaders.AUTHORIZATION, tokenType + " " + token);
+    }
   }
 
   private reactor.util.retry.RetryBackoffSpec retry() {

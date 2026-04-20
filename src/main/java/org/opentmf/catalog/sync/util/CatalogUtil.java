@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Generated;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.opentmf.catalog.sync.model.CatalogConstants;
 import org.opentmf.catalog.sync.model.CatalogType;
 import org.opentmf.catalog.sync.model.SingleContext;
@@ -96,7 +97,6 @@ public final class CatalogUtil {
     tree.put(CatalogConstants.VERSION, "1");
     tree.put("lifecycleStatus", "Launched");
     var validFor = JacksonUtil.getDefaultJsonMapper().createObjectNode();
-    validFor.remove("endDateTime");
     validFor.put("startDateTime",
         ZonedDateTime.now(ZoneId.of("UTC")).plusMinutes(1L).format(ISO_OFFSET_DATE_TIME));
     tree.replace(CatalogConstants.VALID_FOR, validFor);
@@ -121,7 +121,8 @@ public final class CatalogUtil {
             id, compareResult, json1, json2);
       }
       return compareResult.passed();
-    } catch (Exception ignored) {
+    } catch (JSONException e) {
+      log.warn("{}: JSON comparison failed, treating as not equal.", id, e);
       return false;
     }
   }

@@ -10,7 +10,7 @@ import org.opentmf.client.common.model.ClientProperties;
 import org.opentmf.client.reactive.service.api.TokenService;
 import org.opentmf.client.rest.service.api.SyncTokenService;
 import org.opentmf.db.lock.config.DbLockAutoConfiguration;
-import org.opentmf.db.lock.service.api.DbLockService;
+import org.opentmf.db.lock.model.LockContext;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -24,7 +24,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 /**
  * Auto-configuration that initialises the catalog sync service on application startup.
  * Detects whether the configured client-ref points to a reactive (WebClient) or
- * synchronous (RestTemplate) HTTP client and creates the appropriate service implementation.
+ * synchronous (RestClient) HTTP client and creates the appropriate service implementation.
  *
  * @author Gokhan Demir
  */
@@ -37,15 +37,17 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Slf4j
 public class CatalogSyncAutoConfiguration implements SmartInitializingSingleton {
 
+  private final ApplicationContext applicationContext;
   private final CatalogSyncProperties catalogSyncProperties;
   private final CatalogSyncService catalogSyncService;
 
-  public CatalogSyncAutoConfiguration(ApplicationContext ctx, DbLockService dbLockService,
+  public CatalogSyncAutoConfiguration(ApplicationContext ctx,
       CatalogSyncProperties catalogSyncProperties) {
+    this.applicationContext = ctx;
     this.catalogSyncProperties = catalogSyncProperties;
     var clientRef = catalogSyncProperties.getClientRef();
     var clientProperties = (ClientProperties) ctx.getBean(clientRef + "ClientProperties");
-    this.catalogSyncService = buildSyncService(ctx, clientRef, clientProperties, dbLockService,
+    this.catalogSyncService = buildSyncService(ctx, clientRef, clientProperties,
         catalogSyncProperties);
   }
 
@@ -59,7 +61,8 @@ public class CatalogSyncAutoConfiguration implements SmartInitializingSingleton 
     if (catalogSyncProperties.isEnabled()) {
       log.info("Initializing the Catalog Sync Service.");
       try {
-        catalogSyncService.ensureCatalogConsistency();
+        applicationContext.getBean(CatalogSyncService.class)
+            .ensureCatalogConsistency(new LockContext());
       } finally {
         log.info("Completed initializing the Catalog Sync Service.");
       }
@@ -67,19 +70,18 @@ public class CatalogSyncAutoConfiguration implements SmartInitializingSingleton 
   }
 
   private static CatalogSyncService buildSyncService(ApplicationContext ctx, String clientRef,
-      ClientProperties clientProperties, DbLockService dbLockService,
-      CatalogSyncProperties catalogSyncProperties) {
+      ClientProperties clientProperties, CatalogSyncProperties catalogSyncProperties) {
     if (ctx.containsBean(clientRef + "WebClient")) {
       log.info("Using reactive (WebClient) transport for client-ref '{}'.", clientRef);
       var webClient = (WebClient) ctx.getBean(clientRef + "WebClient");
       var tokenService = (TokenService) ctx.getBean(clientRef + "TokenService");
       var client = new CatalogReactiveClientImpl(webClient, tokenService, clientProperties);
-      return new ReactiveCatalogSyncServiceImpl(catalogSyncProperties, dbLockService, client);
+      return new ReactiveCatalogSyncServiceImpl(catalogSyncProperties, client);
     }
     log.info("Using synchronous (RestClient) transport for client-ref '{}'.", clientRef);
     var restClient = (RestClient) ctx.getBean(clientRef + "RestClient");
     var syncTokenService = (SyncTokenService) ctx.getBean(clientRef + "TokenService");
     var client = new CatalogRestClientImpl(restClient, syncTokenService, clientProperties);
-    return new RestCatalogSyncServiceImpl(catalogSyncProperties, dbLockService, client);
+    return new RestCatalogSyncServiceImpl(catalogSyncProperties, client);
   }
 }

@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the JSON equality comparison logic now living in {@link CatalogUtil}.
+ * Tests for the JSON equality comparison logic in {@link CatalogUtil}.
  *
  * @author Gokhan Demir
  */
-class JacksonUtil2Tests {
+class CatalogUtilEqualsTests {
 
   @Test
   void testEquals_withEqualObjectsButDifferentCharacteristicOrder_returnsTrue() {
